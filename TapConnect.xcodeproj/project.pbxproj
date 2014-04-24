@@ -1,0 +1,595 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D379A4BC1907BF6E002A7D1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379A4BB1907BF6E002A7D1F /* Foundation.framework */; };
+		D379A4BE1907BF6E002A7D1F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379A4BD1907BF6E002A7D1F /* CoreGraphics.framework */; };
+		D379A4C01907BF6E002A7D1F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379A4BF1907BF6E002A7D1F /* UIKit.framework */; };
+		D379A4C61907BF6E002A7D1F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D379A4C41907BF6E002A7D1F /* InfoPlist.strings */; };
+		D379A4C81907BF6E002A7D1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A4C71907BF6E002A7D1F /* main.m */; };
+		D379A4CC1907BF6E002A7D1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A4CB1907BF6E002A7D1F /* AppDelegate.m */; };
+		D379A4CF1907BF6E002A7D1F /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D379A4CD1907BF6E002A7D1F /* Main_iPhone.storyboard */; };
+		D379A4D21907BF6E002A7D1F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D379A4D01907BF6E002A7D1F /* Main_iPad.storyboard */; };
+		D379A4D51907BF6E002A7D1F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A4D41907BF6E002A7D1F /* ViewController.m */; };
+		D379A4D71907BF6E002A7D1F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D379A4D61907BF6E002A7D1F /* Images.xcassets */; };
+		D379A4DE1907BF6E002A7D1F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379A4DD1907BF6E002A7D1F /* XCTest.framework */; };
+		D379A4DF1907BF6E002A7D1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379A4BB1907BF6E002A7D1F /* Foundation.framework */; };
+		D379A4E01907BF6E002A7D1F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379A4BF1907BF6E002A7D1F /* UIKit.framework */; };
+		D379A4E81907BF6E002A7D1F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D379A4E61907BF6E002A7D1F /* InfoPlist.strings */; };
+		D379A4EA1907BF6E002A7D1F /* TapConnectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A4E91907BF6E002A7D1F /* TapConnectTests.m */; };
+		D379A4F51907F692002A7D1F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A4F41907F692002A7D1F /* LoginViewController.m */; };
+		D379A4F81907F768002A7D1F /* DesignManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A4F71907F768002A7D1F /* DesignManager.m */; };
+		D379A5111907FC72002A7D1F /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A4FC1907FC72002A7D1F /* MASCompositeConstraint.m */; };
+		D379A5121907FC72002A7D1F /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A4FE1907FC72002A7D1F /* MASConstraint.m */; };
+		D379A5131907FC72002A7D1F /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A5001907FC72002A7D1F /* MASConstraintMaker.m */; };
+		D379A5141907FC72002A7D1F /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A5021907FC72002A7D1F /* MASLayoutConstraint.m */; };
+		D379A5151907FC72002A7D1F /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A5061907FC72002A7D1F /* MASViewAttribute.m */; };
+		D379A5161907FC72002A7D1F /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A5081907FC72002A7D1F /* MASViewConstraint.m */; };
+		D379A5171907FC72002A7D1F /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A50A1907FC72002A7D1F /* NSArray+MASAdditions.m */; };
+		D379A5181907FC72002A7D1F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A50D1907FC72002A7D1F /* NSLayoutConstraint+MASDebugAdditions.m */; };
+		D379A5191907FC72002A7D1F /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A50F1907FC72002A7D1F /* View+MASAdditions.m */; };
+		D3B7641519091A8A00BF9C7A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B7641419091A8A00BF9C7A /* CoreBluetooth.framework */; };
+		D3B76417190920D300BF9C7A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B76416190920D300BF9C7A /* CoreLocation.framework */; };
+		D3F82EE61908852C004BE587 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F82EE51908852C004BE587 /* QuartzCore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D379A4E11907BF6E002A7D1F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D379A4B01907BF6E002A7D1F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D379A4B71907BF6E002A7D1F;
+			remoteInfo = TapConnect;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D379A4B81907BF6E002A7D1F /* TapConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D379A4BB1907BF6E002A7D1F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D379A4BD1907BF6E002A7D1F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D379A4BF1907BF6E002A7D1F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D379A4C31907BF6E002A7D1F /* TapConnect-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TapConnect-Info.plist"; sourceTree = "<group>"; };
+		D379A4C51907BF6E002A7D1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D379A4C71907BF6E002A7D1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D379A4C91907BF6E002A7D1F /* TapConnect-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TapConnect-Prefix.pch"; sourceTree = "<group>"; };
+		D379A4CA1907BF6E002A7D1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D379A4CB1907BF6E002A7D1F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D379A4CE1907BF6E002A7D1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		D379A4D11907BF6E002A7D1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		D379A4D31907BF6E002A7D1F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D379A4D41907BF6E002A7D1F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D379A4D61907BF6E002A7D1F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D379A4DC1907BF6E002A7D1F /* TapConnectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapConnectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D379A4DD1907BF6E002A7D1F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		D379A4E51907BF6E002A7D1F /* TapConnectTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TapConnectTests-Info.plist"; sourceTree = "<group>"; };
+		D379A4E71907BF6E002A7D1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D379A4E91907BF6E002A7D1F /* TapConnectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TapConnectTests.m; sourceTree = "<group>"; };
+		D379A4F31907F692002A7D1F /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		D379A4F41907F692002A7D1F /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		D379A4F61907F768002A7D1F /* DesignManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DesignManager.h; sourceTree = "<group>"; };
+		D379A4F71907F768002A7D1F /* DesignManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DesignManager.m; sourceTree = "<group>"; };
+		D379A4FB1907FC72002A7D1F /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASCompositeConstraint.h; path = Library/Masonry/MASCompositeConstraint.h; sourceTree = "<group>"; };
+		D379A4FC1907FC72002A7D1F /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MASCompositeConstraint.m; path = Library/Masonry/MASCompositeConstraint.m; sourceTree = "<group>"; };
+		D379A4FD1907FC72002A7D1F /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASConstraint.h; path = Library/Masonry/MASConstraint.h; sourceTree = "<group>"; };
+		D379A4FE1907FC72002A7D1F /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MASConstraint.m; path = Library/Masonry/MASConstraint.m; sourceTree = "<group>"; };
+		D379A4FF1907FC72002A7D1F /* MASConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASConstraintMaker.h; path = Library/Masonry/MASConstraintMaker.h; sourceTree = "<group>"; };
+		D379A5001907FC72002A7D1F /* MASConstraintMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MASConstraintMaker.m; path = Library/Masonry/MASConstraintMaker.m; sourceTree = "<group>"; };
+		D379A5011907FC72002A7D1F /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASLayoutConstraint.h; path = Library/Masonry/MASLayoutConstraint.h; sourceTree = "<group>"; };
+		D379A5021907FC72002A7D1F /* MASLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MASLayoutConstraint.m; path = Library/Masonry/MASLayoutConstraint.m; sourceTree = "<group>"; };
+		D379A5031907FC72002A7D1F /* Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Masonry.h; path = Library/Masonry/Masonry.h; sourceTree = "<group>"; };
+		D379A5041907FC72002A7D1F /* MASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASUtilities.h; path = Library/Masonry/MASUtilities.h; sourceTree = "<group>"; };
+		D379A5051907FC72002A7D1F /* MASViewAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASViewAttribute.h; path = Library/Masonry/MASViewAttribute.h; sourceTree = "<group>"; };
+		D379A5061907FC72002A7D1F /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MASViewAttribute.m; path = Library/Masonry/MASViewAttribute.m; sourceTree = "<group>"; };
+		D379A5071907FC72002A7D1F /* MASViewConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASViewConstraint.h; path = Library/Masonry/MASViewConstraint.h; sourceTree = "<group>"; };
+		D379A5081907FC72002A7D1F /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MASViewConstraint.m; path = Library/Masonry/MASViewConstraint.m; sourceTree = "<group>"; };
+		D379A5091907FC72002A7D1F /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASAdditions.h"; path = "Library/Masonry/NSArray+MASAdditions.h"; sourceTree = "<group>"; };
+		D379A50A1907FC72002A7D1F /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+MASAdditions.m"; path = "Library/Masonry/NSArray+MASAdditions.m"; sourceTree = "<group>"; };
+		D379A50B1907FC72002A7D1F /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASShorthandAdditions.h"; path = "Library/Masonry/NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		D379A50C1907FC72002A7D1F /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+MASDebugAdditions.h"; path = "Library/Masonry/NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
+		D379A50D1907FC72002A7D1F /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+MASDebugAdditions.m"; path = "Library/Masonry/NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
+		D379A50E1907FC72002A7D1F /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "View+MASAdditions.h"; path = "Library/Masonry/View+MASAdditions.h"; sourceTree = "<group>"; };
+		D379A50F1907FC72002A7D1F /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "View+MASAdditions.m"; path = "Library/Masonry/View+MASAdditions.m"; sourceTree = "<group>"; };
+		D379A5101907FC72002A7D1F /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Library/Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		D3B7641419091A8A00BF9C7A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		D3B76416190920D300BF9C7A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D3F82EE51908852C004BE587 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D379A4B51907BF6E002A7D1F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3B76417190920D300BF9C7A /* CoreLocation.framework in Frameworks */,
+				D3B7641519091A8A00BF9C7A /* CoreBluetooth.framework in Frameworks */,
+				D3F82EE61908852C004BE587 /* QuartzCore.framework in Frameworks */,
+				D379A4BE1907BF6E002A7D1F /* CoreGraphics.framework in Frameworks */,
+				D379A4C01907BF6E002A7D1F /* UIKit.framework in Frameworks */,
+				D379A4BC1907BF6E002A7D1F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D379A4D91907BF6E002A7D1F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D379A4DE1907BF6E002A7D1F /* XCTest.framework in Frameworks */,
+				D379A4E01907BF6E002A7D1F /* UIKit.framework in Frameworks */,
+				D379A4DF1907BF6E002A7D1F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D379A4AF1907BF6E002A7D1F = {
+			isa = PBXGroup;
+			children = (
+				D379A4F91907FC54002A7D1F /* Library */,
+				D379A4C11907BF6E002A7D1F /* TapConnect */,
+				D379A4E31907BF6E002A7D1F /* TapConnectTests */,
+				D379A4BA1907BF6E002A7D1F /* Frameworks */,
+				D379A4B91907BF6E002A7D1F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D379A4B91907BF6E002A7D1F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D379A4B81907BF6E002A7D1F /* TapConnect.app */,
+				D379A4DC1907BF6E002A7D1F /* TapConnectTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D379A4BA1907BF6E002A7D1F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D3B76416190920D300BF9C7A /* CoreLocation.framework */,
+				D3B7641419091A8A00BF9C7A /* CoreBluetooth.framework */,
+				D3F82EE51908852C004BE587 /* QuartzCore.framework */,
+				D379A4BB1907BF6E002A7D1F /* Foundation.framework */,
+				D379A4BD1907BF6E002A7D1F /* CoreGraphics.framework */,
+				D379A4BF1907BF6E002A7D1F /* UIKit.framework */,
+				D379A4DD1907BF6E002A7D1F /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D379A4C11907BF6E002A7D1F /* TapConnect */ = {
+			isa = PBXGroup;
+			children = (
+				D379A4CA1907BF6E002A7D1F /* AppDelegate.h */,
+				D379A4CB1907BF6E002A7D1F /* AppDelegate.m */,
+				D379A4CD1907BF6E002A7D1F /* Main_iPhone.storyboard */,
+				D379A4D01907BF6E002A7D1F /* Main_iPad.storyboard */,
+				D379A4D31907BF6E002A7D1F /* ViewController.h */,
+				D379A4D41907BF6E002A7D1F /* ViewController.m */,
+				D379A4D61907BF6E002A7D1F /* Images.xcassets */,
+				D379A4C21907BF6E002A7D1F /* Supporting Files */,
+				D379A4F31907F692002A7D1F /* LoginViewController.h */,
+				D379A4F41907F692002A7D1F /* LoginViewController.m */,
+				D379A4F61907F768002A7D1F /* DesignManager.h */,
+				D379A4F71907F768002A7D1F /* DesignManager.m */,
+			);
+			path = TapConnect;
+			sourceTree = "<group>";
+		};
+		D379A4C21907BF6E002A7D1F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D379A4C31907BF6E002A7D1F /* TapConnect-Info.plist */,
+				D379A4C41907BF6E002A7D1F /* InfoPlist.strings */,
+				D379A4C71907BF6E002A7D1F /* main.m */,
+				D379A4C91907BF6E002A7D1F /* TapConnect-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D379A4E31907BF6E002A7D1F /* TapConnectTests */ = {
+			isa = PBXGroup;
+			children = (
+				D379A4E91907BF6E002A7D1F /* TapConnectTests.m */,
+				D379A4E41907BF6E002A7D1F /* Supporting Files */,
+			);
+			path = TapConnectTests;
+			sourceTree = "<group>";
+		};
+		D379A4E41907BF6E002A7D1F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D379A4E51907BF6E002A7D1F /* TapConnectTests-Info.plist */,
+				D379A4E61907BF6E002A7D1F /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D379A4F91907FC54002A7D1F /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				D379A4FA1907FC5D002A7D1F /* Masorny */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		D379A4FA1907FC5D002A7D1F /* Masorny */ = {
+			isa = PBXGroup;
+			children = (
+				D379A4FB1907FC72002A7D1F /* MASCompositeConstraint.h */,
+				D379A4FC1907FC72002A7D1F /* MASCompositeConstraint.m */,
+				D379A4FD1907FC72002A7D1F /* MASConstraint.h */,
+				D379A4FE1907FC72002A7D1F /* MASConstraint.m */,
+				D379A4FF1907FC72002A7D1F /* MASConstraintMaker.h */,
+				D379A5001907FC72002A7D1F /* MASConstraintMaker.m */,
+				D379A5011907FC72002A7D1F /* MASLayoutConstraint.h */,
+				D379A5021907FC72002A7D1F /* MASLayoutConstraint.m */,
+				D379A5031907FC72002A7D1F /* Masonry.h */,
+				D379A5041907FC72002A7D1F /* MASUtilities.h */,
+				D379A5051907FC72002A7D1F /* MASViewAttribute.h */,
+				D379A5061907FC72002A7D1F /* MASViewAttribute.m */,
+				D379A5071907FC72002A7D1F /* MASViewConstraint.h */,
+				D379A5081907FC72002A7D1F /* MASViewConstraint.m */,
+				D379A5091907FC72002A7D1F /* NSArray+MASAdditions.h */,
+				D379A50A1907FC72002A7D1F /* NSArray+MASAdditions.m */,
+				D379A50B1907FC72002A7D1F /* NSArray+MASShorthandAdditions.h */,
+				D379A50C1907FC72002A7D1F /* NSLayoutConstraint+MASDebugAdditions.h */,
+				D379A50D1907FC72002A7D1F /* NSLayoutConstraint+MASDebugAdditions.m */,
+				D379A50E1907FC72002A7D1F /* View+MASAdditions.h */,
+				D379A50F1907FC72002A7D1F /* View+MASAdditions.m */,
+				D379A5101907FC72002A7D1F /* View+MASShorthandAdditions.h */,
+			);
+			name = Masorny;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D379A4B71907BF6E002A7D1F /* TapConnect */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D379A4ED1907BF6E002A7D1F /* Build configuration list for PBXNativeTarget "TapConnect" */;
+			buildPhases = (
+				D379A4B41907BF6E002A7D1F /* Sources */,
+				D379A4B51907BF6E002A7D1F /* Frameworks */,
+				D379A4B61907BF6E002A7D1F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TapConnect;
+			productName = TapConnect;
+			productReference = D379A4B81907BF6E002A7D1F /* TapConnect.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D379A4DB1907BF6E002A7D1F /* TapConnectTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D379A4F01907BF6E002A7D1F /* Build configuration list for PBXNativeTarget "TapConnectTests" */;
+			buildPhases = (
+				D379A4D81907BF6E002A7D1F /* Sources */,
+				D379A4D91907BF6E002A7D1F /* Frameworks */,
+				D379A4DA1907BF6E002A7D1F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D379A4E21907BF6E002A7D1F /* PBXTargetDependency */,
+			);
+			name = TapConnectTests;
+			productName = TapConnectTests;
+			productReference = D379A4DC1907BF6E002A7D1F /* TapConnectTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D379A4B01907BF6E002A7D1F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = donald;
+				TargetAttributes = {
+					D379A4DB1907BF6E002A7D1F = {
+						TestTargetID = D379A4B71907BF6E002A7D1F;
+					};
+				};
+			};
+			buildConfigurationList = D379A4B31907BF6E002A7D1F /* Build configuration list for PBXProject "TapConnect" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D379A4AF1907BF6E002A7D1F;
+			productRefGroup = D379A4B91907BF6E002A7D1F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D379A4B71907BF6E002A7D1F /* TapConnect */,
+				D379A4DB1907BF6E002A7D1F /* TapConnectTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D379A4B61907BF6E002A7D1F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D379A4D21907BF6E002A7D1F /* Main_iPad.storyboard in Resources */,
+				D379A4D71907BF6E002A7D1F /* Images.xcassets in Resources */,
+				D379A4CF1907BF6E002A7D1F /* Main_iPhone.storyboard in Resources */,
+				D379A4C61907BF6E002A7D1F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D379A4DA1907BF6E002A7D1F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D379A4E81907BF6E002A7D1F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D379A4B41907BF6E002A7D1F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D379A5181907FC72002A7D1F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				D379A4F51907F692002A7D1F /* LoginViewController.m in Sources */,
+				D379A5161907FC72002A7D1F /* MASViewConstraint.m in Sources */,
+				D379A4D51907BF6E002A7D1F /* ViewController.m in Sources */,
+				D379A4CC1907BF6E002A7D1F /* AppDelegate.m in Sources */,
+				D379A4C81907BF6E002A7D1F /* main.m in Sources */,
+				D379A5191907FC72002A7D1F /* View+MASAdditions.m in Sources */,
+				D379A5111907FC72002A7D1F /* MASCompositeConstraint.m in Sources */,
+				D379A5151907FC72002A7D1F /* MASViewAttribute.m in Sources */,
+				D379A5131907FC72002A7D1F /* MASConstraintMaker.m in Sources */,
+				D379A5171907FC72002A7D1F /* NSArray+MASAdditions.m in Sources */,
+				D379A5121907FC72002A7D1F /* MASConstraint.m in Sources */,
+				D379A5141907FC72002A7D1F /* MASLayoutConstraint.m in Sources */,
+				D379A4F81907F768002A7D1F /* DesignManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D379A4D81907BF6E002A7D1F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D379A4EA1907BF6E002A7D1F /* TapConnectTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D379A4E21907BF6E002A7D1F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D379A4B71907BF6E002A7D1F /* TapConnect */;
+			targetProxy = D379A4E11907BF6E002A7D1F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D379A4C41907BF6E002A7D1F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D379A4C51907BF6E002A7D1F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D379A4CD1907BF6E002A7D1F /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D379A4CE1907BF6E002A7D1F /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		D379A4D01907BF6E002A7D1F /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D379A4D11907BF6E002A7D1F /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		D379A4E61907BF6E002A7D1F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D379A4E71907BF6E002A7D1F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D379A4EB1907BF6E002A7D1F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D379A4EC1907BF6E002A7D1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D379A4EE1907BF6E002A7D1F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = "$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TapConnect/TapConnect-Prefix.pch";
+				INFOPLIST_FILE = "TapConnect/TapConnect-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D379A4EF1907BF6E002A7D1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = "$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TapConnect/TapConnect-Prefix.pch";
+				INFOPLIST_FILE = "TapConnect/TapConnect-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D379A4F11907BF6E002A7D1F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TapConnect.app/TapConnect";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TapConnect/TapConnect-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TapConnectTests/TapConnectTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		D379A4F21907BF6E002A7D1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TapConnect.app/TapConnect";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TapConnect/TapConnect-Prefix.pch";
+				INFOPLIST_FILE = "TapConnectTests/TapConnectTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D379A4B31907BF6E002A7D1F /* Build configuration list for PBXProject "TapConnect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D379A4EB1907BF6E002A7D1F /* Debug */,
+				D379A4EC1907BF6E002A7D1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D379A4ED1907BF6E002A7D1F /* Build configuration list for PBXNativeTarget "TapConnect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D379A4EE1907BF6E002A7D1F /* Debug */,
+				D379A4EF1907BF6E002A7D1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D379A4F01907BF6E002A7D1F /* Build configuration list for PBXNativeTarget "TapConnectTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D379A4F11907BF6E002A7D1F /* Debug */,
+				D379A4F21907BF6E002A7D1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D379A4B01907BF6E002A7D1F /* Project object */;
+}
