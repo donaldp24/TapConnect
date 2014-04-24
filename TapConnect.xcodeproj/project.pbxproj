@@ -35,6 +35,7 @@
 		D379A5191907FC72002A7D1F /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A50F1907FC72002A7D1F /* View+MASAdditions.m */; };
 		D3B7641519091A8A00BF9C7A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B7641419091A8A00BF9C7A /* CoreBluetooth.framework */; };
 		D3B76417190920D300BF9C7A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B76416190920D300BF9C7A /* CoreLocation.framework */; };
+		D3E25E8C1909BAC9008E097F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E25E8B1909BAC9008E097F /* libz.dylib */; };
 		D3F82EE61908852C004BE587 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F82EE51908852C004BE587 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,11 @@
 		D379A5101907FC72002A7D1F /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Library/Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		D3B7641419091A8A00BF9C7A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D3B76416190920D300BF9C7A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D3CA30E01909B7460006C761 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = TapConnect/TestFlight/TestFlight.h; sourceTree = "<group>"; };
+		D3CA30E11909B7460006C761 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+AsyncLogging.h"; path = "TapConnect/TestFlight/TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		D3CA30E21909B7460006C761 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+ManualSessions.h"; path = "TapConnect/TestFlight/TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		D3E25E891909B7DD008E097F /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = TapConnect/TestFlight/libTestFlight.a; sourceTree = "<group>"; };
+		D3E25E8B1909BAC9008E097F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D3F82EE51908852C004BE587 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -105,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3E25E8C1909BAC9008E097F /* libz.dylib in Frameworks */,
 				D3B76417190920D300BF9C7A /* CoreLocation.framework in Frameworks */,
 				D3B7641519091A8A00BF9C7A /* CoreBluetooth.framework in Frameworks */,
 				D3F82EE61908852C004BE587 /* QuartzCore.framework in Frameworks */,
@@ -130,6 +137,7 @@
 		D379A4AF1907BF6E002A7D1F = {
 			isa = PBXGroup;
 			children = (
+				D3CA30DF1909B7360006C761 /* TestFlight */,
 				D379A4F91907FC54002A7D1F /* Library */,
 				D379A4C11907BF6E002A7D1F /* TapConnect */,
 				D379A4E31907BF6E002A7D1F /* TapConnectTests */,
@@ -150,6 +158,8 @@
 		D379A4BA1907BF6E002A7D1F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3E25E8B1909BAC9008E097F /* libz.dylib */,
+				D3E25E891909B7DD008E097F /* libTestFlight.a */,
 				D3B76416190920D300BF9C7A /* CoreLocation.framework */,
 				D3B7641419091A8A00BF9C7A /* CoreBluetooth.framework */,
 				D3F82EE51908852C004BE587 /* QuartzCore.framework */,
@@ -244,6 +254,16 @@
 				D379A5101907FC72002A7D1F /* View+MASShorthandAdditions.h */,
 			);
 			name = Masorny;
+			sourceTree = "<group>";
+		};
+		D3CA30DF1909B7360006C761 /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				D3CA30E01909B7460006C761 /* TestFlight.h */,
+				D3CA30E11909B7460006C761 /* TestFlight+AsyncLogging.h */,
+				D3CA30E21909B7460006C761 /* TestFlight+ManualSessions.h */,
+			);
+			name = TestFlight;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -492,13 +512,24 @@
 		D379A4EE1907BF6E002A7D1F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = "$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TapConnect/TapConnect-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "TapConnect/TapConnect-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/TapConnect/TestFlight",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6A9C98D4-278E-4E95-B15A-1CBCED2172D0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -506,13 +537,21 @@
 		D379A4EF1907BF6E002A7D1F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = "$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TapConnect/TapConnect-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				INFOPLIST_FILE = "TapConnect/TapConnect-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/TapConnect/TestFlight",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "B523B747-65C6-4FF5-B307-E6EE5969B0AD";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

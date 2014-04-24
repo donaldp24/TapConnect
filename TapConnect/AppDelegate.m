@@ -13,6 +13,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+#ifdef TESTFLIGHT_ENABLED
+    [TestFlight takeOff:@"639dbf31-3ad9-4ebe-8e60-27b91df623d2"];
+#endif
+    
+    
     return YES;
 }
 							
