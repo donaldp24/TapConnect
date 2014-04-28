@@ -26,4 +26,9 @@ static DesignManager *_sharedDesignManagerInstance = nil;
     return @"TapConnect!";
 }
 
++ (NSString *)getStringNoConnectivity
+{
+    return @"Please check your network";
+}
+
 @end

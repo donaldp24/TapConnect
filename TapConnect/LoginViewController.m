@@ -7,8 +7,15 @@
 //
 
 #import "LoginViewController.h"
+#import "AppDelegate.h"
+#import "SVProgressHUD.h"
+#import "NSString+Knotable.h"
+#import "Common.h"
+#import "DesignManager.h"
+#import "User.h"
 
 #define verticalGap 3.0
+#define ktDefaultLoginTimeInterval 20.0
 
 static CGFloat logoLowerPos = 84.0;
 static CGFloat logoUpperPos = 48.0;
@@ -24,10 +31,27 @@ typedef enum
     LoginStateForgotPassword
 } LoginState;
 
+enum  {
+    INPUT_NAME = 0,
+    INPUT_NAME_EXISTS,
+    INPUT_PASSWORD,
+    INPUT_PASSWORD_TOO_SHORT,
+    INPUT_EMAIL,
+    INPUT_EMAIL_INVALID,
+    INPUT_EMAIL_EXISTS,
+    INPUT_CONNECTION_PROBLEM,
+    INPUT_OK
+};
+
 
 @interface LoginViewController () {
     LoginState loginState;
     UIResponder *currentResponder;
+    
+    NSString *_inputUsername;
+    NSString *_inputPassword;
+    NSString *_inputEmail;
+    NSString *_inputFullname;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgBg;
@@ -47,11 +71,12 @@ typedef enum
 
 @property (strong, nonatomic) MASConstraint *loginGroupTopConstraint;
 @property (strong, nonatomic) MASConstraint *passwordFieldTopConstraint;
-@property (strong, nonatomic) MASConstraint *loginFacebookButtonTopConstraint;
 @property (strong, nonatomic) MASConstraint *bottomLeftButtonRightConstraint;
 
 @property (nonatomic, strong) UIInterpolatingMotionEffect *horMotionEffect;
 @property (nonatomic, strong) UIInterpolatingMotionEffect *vertMotionEffect;
+
+@property (nonatomic, strong) NSTimer *checkTimer;
 
 @end
 
@@ -71,11 +96,46 @@ typedef enum
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    // Check if user is cached and linked to Facebook, if so, bypass login
+
+    [User loadUser];
     
-//    CGFloat scaleFactor = 1.2;
-//    [self.imgBg mas_makeConstraints:^(MASConstraintMaker *maker) {
-//        maker.edges.equalTo(self.view);
-//    }];
+    if ([PFUser currentUser]) {
+        // save current user
+        [User setCurrentUser:[User getUserFromPFUser:[PFUser currentUser]]];
+        
+        [self goInto];
+    }
+    else
+    {
+        if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
+            
+            [SVProgressHUD showWithStatus:@"Please wait" maskType:SVProgressHUDMaskTypeGradient];
+            
+            if (![Common hasConnectivity])
+            {
+                [SVProgressHUD showErrorWithStatus:[DesignManager getStringNoConnectivity] duration:3];
+            }
+            
+            // If there's one, just open the session silently, without showing the user the login UI
+            [FBSession openActiveSessionWithReadPermissions:@[@"basic_info"]
+                                               allowLoginUI:NO
+                                          completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+                                              // Handler for session state changes
+                                              // This method will be called EACH time the session state changes,
+                                              // also for intermediate states and NOT just when the session open
+                                              // If the session was opened successfully
+                                              if (!error && state == FBSessionStateOpen){
+                                                  NSLog(@"Session opened");
+                                                  [SVProgressHUD dismiss];
+                                                  [self performSelectorOnMainThread:@selector(goInto) withObject:nil waitUntilDone:NO];
+                                                  return;
+                                              }
+                                              [SVProgressHUD dismiss];
+                                          }];
+        }
+    }
+    
     
     self.horMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x"
                                                                            type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
@@ -154,6 +214,22 @@ typedef enum
     
     [self initializeTextFields];
     
+    
+    _loginFacebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_loginFacebookButton setImage:[UIImage imageNamed:@"loginfacebook"] forState:UIControlStateNormal];
+    [_loginFacebookButton setTitle:@"" forState:UIControlStateNormal];
+    [_loginFacebookButton addTarget:self action:@selector(onLoginWithFacebook:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:_loginFacebookButton];
+    
+    [_loginFacebookButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@42.0);
+        make.width.equalTo(@260.0);
+        make.centerX.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-50);
+    }];
+     
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTap:)];
     [self.view addGestureRecognizer:tap];
 }
@@ -194,19 +270,17 @@ typedef enum
 }
 
 - (void) initializeTextFields {
-    
-    
-    
-    _usernameTextField = [self loginTextFieldForIcon:@"login-username" placeholder:@"USERNAME"];
-    _usernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    _usernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    _usernameTextField.spellCheckingType = UITextSpellCheckingTypeNo;
-    
+
     _emailTextField = [self loginTextFieldForIcon:@"login-email" placeholder:@"EMAIL"];
     _emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
     _emailTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     _emailTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     _emailTextField.spellCheckingType = UITextSpellCheckingTypeNo;
+    
+    _usernameTextField = [self loginTextFieldForIcon:@"login-username" placeholder:@"USERNAME"];
+    _usernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    _usernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    _usernameTextField.spellCheckingType = UITextSpellCheckingTypeNo;
     
     _passwordTextField = [self loginTextFieldForIcon:@"login-password" placeholder:@"PASSWORD"];
     _passwordTextField.secureTextEntry = YES;
@@ -215,10 +289,6 @@ typedef enum
     _passwordTextField.spellCheckingType = UITextSpellCheckingTypeNo;
     
     //usernameTextField.alpha = _passwordTextField.alpha = _emailTextField.alpha = 0.5;
-    
-    _loginFacebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_loginFacebookButton setImage:[UIImage imageNamed:@"loginfacebook"] forState:UIControlStateNormal];
-    [_loginFacebookButton setTitle:@"" forState:UIControlStateNormal];
     
     _submitButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _submitButton.backgroundColor = [UIColor colorWithRed:0.21 green:0.68 blue:0.90 alpha:1.0];
@@ -232,10 +302,9 @@ typedef enum
     _loginGroup = [UIView new];
     _loginGroup.backgroundColor = [UIColor clearColor];
     
-    [_loginGroup addSubview:_usernameTextField];
     [_loginGroup addSubview:_emailTextField];
+    [_loginGroup addSubview:_usernameTextField];
     [_loginGroup addSubview:_passwordTextField];
-    [_loginGroup addSubview:_loginFacebookButton];
     [_loginGroup addSubview:_submitButton];
     
     
@@ -243,7 +312,7 @@ typedef enum
     [self.view addSubview:_loginGroup];
     
     
-    [_usernameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_emailTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@42.0);
         make.width.equalTo(@260.0);
         make.top.equalTo(@0);
@@ -252,36 +321,27 @@ typedef enum
     }];
     
     [_passwordTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.equalTo(_usernameTextField);
-        make.left.equalTo(_usernameTextField);
-        self.passwordFieldTopConstraint = make.top.equalTo(_usernameTextField.mas_bottom).with.offset(verticalGap);
+        make.size.equalTo(_emailTextField);
+        make.left.equalTo(_emailTextField);
+        self.passwordFieldTopConstraint = make.top.equalTo(_emailTextField.mas_bottom).with.offset(verticalGap);
     }];
     
     //Start out logging in with the email address behind password
-    [_emailTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.equalTo(_usernameTextField);
-        make.left.equalTo(_usernameTextField);
-        make.top.equalTo(_usernameTextField.mas_bottom).with.offset(verticalGap);
+    [_usernameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(_emailTextField);
+        make.left.equalTo(_emailTextField);
+        make.top.equalTo(_emailTextField.mas_bottom).with.offset(verticalGap);
     }];
     
-    _emailTextField.hidden = YES;
+    _usernameTextField.hidden = YES;
     
     
     [_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.equalTo(_usernameTextField);
         make.left.equalTo(_usernameTextField);
         make.top.equalTo(_passwordTextField.mas_bottom).with.offset(15.0);
-        //make.bottom.equalTo(@0);
-    }];
-    
-    [_loginFacebookButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.equalTo(_submitButton);
-        make.left.equalTo(_submitButton);
-        self.loginFacebookButtonTopConstraint = make.top.equalTo(_submitButton.mas_top);
         make.bottom.equalTo(@0);
     }];
-    
-    _loginFacebookButton.hidden = YES;
     
     [_loginGroup mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(@0);
@@ -339,6 +399,12 @@ typedef enum
 
 #pragma mark Navigation methods between states of the Login screen
 
+- (void)goInto
+{
+    [self goBackToLogin:nil];
+    [self performSegueWithIdentifier:@"tomain" sender:self];
+}
+
 #pragma mark Login
 
 - (IBAction)onLogin:(id)sender {
@@ -346,39 +412,43 @@ typedef enum
         [currentResponder resignFirstResponder];
     }
     
-    /*int nInput = [self getInputType];
+    int nInput = [self getInputType];
      
      if (nInput != INPUT_OK) {
-     [self showAlertMessage:nInput];
+         [self showAlertMessage:nInput];
      } else {
-     _checkTimer = [NSTimer scheduledTimerWithTimeInterval:ktDefaultLoginTimeInterval target:self selector:@selector(onTimer:) userInfo:nil repeats:NO];
-     [SVProgressHUD showWithStatus:@"Please wait" maskType:SVProgressHUDMaskTypeGradient];
-     
-     [self loginWithMeteor];
+         //_checkTimer = [NSTimer scheduledTimerWithTimeInterval:ktDefaultLoginTimeInterval target:self selector:@selector(onTimer:) userInfo:nil repeats:NO];
+         [SVProgressHUD showWithStatus:@"Please wait" maskType:SVProgressHUDMaskTypeGradient];
+         
+         if (![Common hasConnectivity])
+         {
+             [SVProgressHUD showErrorWithStatus:[DesignManager getStringNoConnectivity] duration:3];
+             return;
+         }
+         [PFUser logInWithUsernameInBackground:_inputEmail password:_inputPassword
+                                         block:^(PFUser *user, NSError *error) {
+                                             if (user) {
+                                                 // Do stuff after successful login.
+                                                 [SVProgressHUD dismiss];
+                                                 [User setCurrentUser:[User getUserFromPFUser:user]];
+                                                 
+                                                 [self performSelectorOnMainThread:@selector(goInto) withObject:nil waitUntilDone:NO];
+                                             } else {
+                                                 // The login failed. Check error to see why.
+                                                 //[SVProgressHUD showErrorWithStatus:[error localizedDescription] duration:3];
+                                                 
+                                                 [SVProgressHUD showErrorWithStatus:@"Email address and Password is not valied!" duration:3];
+                                             }
+                                         }];
      }
-     */
-    
-    [self performSegueWithIdentifier:@"tomain" sender:self];
 }
 
 - (void)prepareForEnteringLoginState {
     loginState = LoginStateLoggingIn;
-    
-    /*
-    [_loginFacebookBottomConstraint uninstall];
-    [_loginFacebookButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        self.loginFacebookBottomConstraint = make.bottom.equalTo(_usernameTextField.mas_top).with.offset(-verticalGap);
-    }];
-     */
-    
+
     [_passwordFieldTopConstraint uninstall];
     [_passwordTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        self.passwordFieldTopConstraint = make.top.equalTo(_usernameTextField.mas_bottom).with.offset(verticalGap);
-    }];
-    
-    [_loginFacebookButtonTopConstraint uninstall];
-    [_loginFacebookButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        self.loginFacebookButtonTopConstraint = make.top.equalTo(_submitButton.mas_top);
+        self.passwordFieldTopConstraint = make.top.equalTo(_emailTextField.mas_bottom).with.offset(verticalGap);
     }];
     
     [_logo mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -402,8 +472,7 @@ typedef enum
     [_submitButton setTitle:@"LOGIN" forState:UIControlStateNormal];
     [UIView setAnimationsEnabled:YES];
     
-    _loginFacebookButton.hidden = YES;
-    _emailTextField.hidden = YES;
+    _usernameTextField.hidden = YES;
     
     [_bottomLeftButton addTarget:self action:@selector(enterSignup:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomRightButton addTarget:self action:@selector(enterForgotPassword:) forControlEvents:UIControlEventTouchUpInside];
@@ -420,16 +489,11 @@ typedef enum
 
 - (IBAction)enterSignup:(id)sender {
     loginState = LoginStateSigningUp;
-    _loginFacebookButton.hidden = NO;
-    _emailTextField.hidden = NO;
+    
+    _usernameTextField.hidden = NO;
     [_passwordFieldTopConstraint uninstall];
     [_passwordTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        self.passwordFieldTopConstraint = make.top.equalTo(_emailTextField.mas_bottom).with.offset(verticalGap);
-    }];
-    
-    [_loginFacebookButtonTopConstraint uninstall];
-    [_loginFacebookButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        self.loginFacebookButtonTopConstraint = make.top.equalTo(_submitButton.mas_bottom).with.offset(verticalGap);
+        self.passwordFieldTopConstraint = make.top.equalTo(_usernameTextField.mas_bottom).with.offset(verticalGap);
     }];
     
     [_logo mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -453,7 +517,7 @@ typedef enum
 }
 
 - (void)configureSignUpState {
-    
+
     //Without these there is an unwanted fade animation
     [UIView setAnimationsEnabled:NO];
     [_bottomLeftButton setTitle:@"BACK" forState:UIControlStateNormal];
@@ -470,42 +534,202 @@ typedef enum
     if (currentResponder) {
         [currentResponder resignFirstResponder];
     }
-    /*
+    
     int nInput = [self getInputType];
     
     if (nInput != INPUT_OK) {
         [self showAlertMessage:nInput];
     } else {
-        //UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"TO DO: Server integration to Sign Up" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        //[alert show];
         
-        // checkUsernameExist
+        [SVProgressHUD showWithStatus:@"Please wait" maskType:SVProgressHUDMaskTypeGradient];
         
-        AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        if(app.meteor){
-            MeteorClient *meteor = app.meteor;
-            NSLog(@"have meteor, connected ? %d ", meteor.connected);
-            
-            [meteor callMethodName:@"checkUsernameExist" parameters:@[_inputUsername] responseCallback:^(NSDictionary *response, NSError *error) {
-                
-                if(error){
-                    NSLog(@"called checkUsernameExist got error %@", error);
-                    if([MeteorClientTransportErrorDomain isEqualToString:error.domain] && error.code == 0){
-                        [self showAlertMessage:INPUT_CONNECTION_PROBLEM];
-                    }
-                    return;
-                }
-                
-                BOOL usernameExists = ((NSNumber *)response[@"result"]).boolValue;
-                NSLog(@"usernameExists? %d", usernameExists);
-                
-                [self usernameExistsResponse:usernameExists];
-            }];
-            
-            
+        if (![Common hasConnectivity])
+        {
+            [SVProgressHUD showErrorWithStatus:[DesignManager getStringNoConnectivity] duration:3];
+            return;
         }
+        
+        PFUser *user = [PFUser user];
+        user.username = _inputEmail;
+        user.password = _inputPassword;
+        user[@"displayname"] = _inputUsername;
+        user[@"usertype"] = [NSString stringWithFormat:@"%d", UserTypeNative];
+
+        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {
+                // Hooray! Let them use the app now.
+                [SVProgressHUD dismiss];
+                [User setCurrentUser:[User getUserFromPFUser:user]];
+                [self performSelectorOnMainThread:@selector(goInto) withObject:nil waitUntilDone:NO];
+            } else {
+                NSString *errorString = [error userInfo][@"error"];
+                // Show the errorString somewhere and let the user try again.
+                [SVProgressHUD showErrorWithStatus:errorString duration:3];
+            }
+        }];
+        // checkUsernameExist
     }
-    */
+    
+}
+
+- (void)onLoginWithFacebook:(id)sender {
+    
+    [SVProgressHUD showWithStatus:@"Please wait" maskType:SVProgressHUDMaskTypeGradient];
+    
+    if (![Common hasConnectivity])
+    {
+        [SVProgressHUD showErrorWithStatus:[DesignManager getStringNoConnectivity] duration:3];
+        return;
+    }
+    
+    
+    // If the session state is any of the two "open" states when the button is clicked
+    if (FBSession.activeSession.state == FBSessionStateOpen
+        || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
+        
+        // Close the session and remove the access token from the cache
+        // The session state handler (in the app delegate) will be called automatically
+        [FBSession.activeSession closeAndClearTokenInformation];
+    }
+    
+    {
+        // Open a session showing the user the login UI
+        // You must ALWAYS ask for basic_info permissions when opening a session
+        [FBSession openActiveSessionWithReadPermissions:@[@"basic_info"]
+                                           allowLoginUI:YES
+                                      completionHandler:
+         ^(FBSession *session, FBSessionState state, NSError *error) {
+             
+             // If the session was opened successfully
+             if (!error && state == FBSessionStateOpen){
+                 NSLog(@"Session opened");
+                 // Request to get information
+                 [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser>* result, NSError *error) {
+                    
+                     if (!error)
+                     {
+                         [User setCurrentUser:[User getUserFromFBUser:result]];
+                         [SVProgressHUD dismiss];
+                         [self performSelectorOnMainThread:@selector(goInto) withObject:nil waitUntilDone:NO];
+                         
+                         /*
+                         [SVProgressHUD showWithStatus:@"Please wait" maskType:SVProgressHUDMaskTypeGradient];
+                         
+                         PFUser *user = [PFUser user];
+                         user.username = [result objectForKey:@"email"];
+                         user.password = [result objectForKey:@"id"];
+                         user[@"displayname"] = [result objectForKey:@"name"];
+                         user[@"usertype"] = [NSString stringWithFormat:@"%d", UserTypeFB];
+
+                         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                             if (!error) {
+                                 // Hooray! Let them use the app now.
+                                 [SVProgressHUD dismiss];
+                                 
+                                 [self performSelectorOnMainThread:@selector(goInto) withObject:nil waitUntilDone:NO];
+                             } else {
+                                 NSString *errorString = [error userInfo][@"error"];
+                                 // Show the errorString somewhere and let the user try again.
+                                 //[SVProgressHUD showErrorWithStatus:errorString duration:3];
+                                 
+                                 [SVProgressHUD dismiss];
+                                 
+                                 [self performSelectorOnMainThread:@selector(goInto) withObject:nil waitUntilDone:NO];
+                             }
+                         }];
+                          */
+                     }
+                     else
+                     {
+                         [SVProgressHUD showErrorWithStatus:@"Getting user info failed." duration:3];
+                     }
+                 }];
+                 
+                 return;
+             }
+             
+             [SVProgressHUD dismiss];
+             
+             if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed){
+                 // If the session is closed
+                 NSLog(@"Session closed");
+                 // Show the user the logged-out UI
+                 //[self userLoggedOut];
+             }
+             
+             // Handle errors
+             if (error){
+                 NSLog(@"Error");
+                 NSString *alertText;
+                 NSString *alertTitle;
+                 // If the error requires people using an app to make an action outside of the app in order to recover
+                 if ([FBErrorUtility shouldNotifyUserForError:error] == YES){
+                     alertTitle = @"Something went wrong";
+                     alertText = [FBErrorUtility userMessageForError:error];
+                     //[self showMessage:alertText withTitle:alertTitle];
+                 } else {
+                     
+                     // If the user cancelled login, do nothing
+                     if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
+                         NSLog(@"User cancelled login");
+                         
+                         // Handle session closures that happen outside of the app
+                     } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession){
+                         alertTitle = @"Session Error";
+                         alertText = @"Your current session is no longer valid. Please log in again.";
+                         //[self showMessage:alertText withTitle:alertTitle];
+                         [SVProgressHUD showErrorWithStatus:alertText duration:3];
+                         
+                         // Here we will handle all other errors with a generic error message.
+                         // We recommend you check our Handling Errors guide for more information
+                         // https://developers.facebook.com/docs/ios/errors/
+                     } else {
+                         //Get more error information from the error
+                         NSDictionary *errorInformation = [[[error.userInfo objectForKey:@"com.facebook.sdk:ParsedJSONResponseKey"] objectForKey:@"body"] objectForKey:@"error"];
+                         
+                         // Show the user an error message
+                         alertTitle = @"Something went wrong";
+                         alertText = [NSString stringWithFormat:@"Please retry. \n\n If the problem persists contact us and mention this error code: %@", [errorInformation objectForKey:@"message"]];
+                         //[self showMessage:alertText withTitle:alertTitle];
+                         [SVProgressHUD showErrorWithStatus:alertText duration:3];
+                     }
+                 }
+                 // Clear this token
+                 [FBSession.activeSession closeAndClearTokenInformation];
+                 // Show the user the logged-out UI
+                 //[self userLoggedOut];
+             }
+             
+         }];
+    }
+     
+    
+    /*
+    // The permissions requested from the user
+    NSArray *permissionsArray = @[ @"email", @"user_about_me", @"user_relationships", @"user_birthday", @"user_location", @"user_checkins"];
+    
+    // Login PFUser using Facebook
+    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+        //[_activityIndicator stopAnimating]; // Hide loading indicator
+        
+        if (!user) {
+            if (!error) {
+                NSLog(@"Uh oh. The user cancelled the Facebook login.");
+            } else {
+                NSLog(@"Uh oh. An error occurred: %@", error);
+            }
+        } else if (user.isNew) {
+            NSLog(@"User with facebook signed up and logged in!");
+            //[self.navigationController pushViewController:[[UserDetailsViewController alloc] initWithStyle:UITableViewStyleGrouped] animated:YES];
+            [self performSelectorOnMainThread:@selector(goInto) withObject:nil waitUntilDone:NO];
+        } else {
+            NSLog(@"User with facebook logged in!");
+            //[self.navigationController pushViewController:[[UserDetailsViewController alloc] initWithStyle:UITableViewStyleGrouped] animated:YES];
+            [self performSelectorOnMainThread:@selector(goInto) withObject:nil waitUntilDone:NO];
+            NSLog(@"User : %@, email : %@", user.username, user.email);
+        }
+    }];
+     */
 }
 
 - (void)leaveSignUpState {
@@ -682,35 +906,18 @@ typedef enum
     if (currentResponder) {
         [currentResponder resignFirstResponder];
     }
-    /*
+    
     int nInput = [self getInputType];
     
     if (nInput != INPUT_OK) {
         [self showAlertMessage:nInput];
     } else {
         
-        AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        if(app.meteor){
-            MeteorClient *meteor = app.meteor;
-            [meteor callMethodName:@"forgotPassword" parameters:@[@{@"email":_inputEmail}] responseCallback:^(NSDictionary *response, NSError *error) {
-                
-                if(error){
-                    NSLog(@"forgotPassword error: %@", response);
-                    NSString *reason = error.userInfo[NSLocalizedDescriptionKey][@"reason"];
-                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:reason message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                    [alert show];
-                } else {
-                    NSLog(@"forgotPassword response: %@", response);
-                    NSString *message = @"Email sent. Please check your email.";
-                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:message message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                    [alert show];
-                    [self exitForgotPassword:nil];
-                }
-            }];
-        }
+        [PFUser requestPasswordResetForEmailInBackground:_inputEmail];
+        [self exitForgotPassword:nil];
         
     }
-     */
+    
 }
 
 - (void)exitForgotPassword:(id)sender {
@@ -808,4 +1015,121 @@ typedef enum
     }];
     
 }
+
+#pragma mark Input Validation
+
+- (void) updateAndCleanInput {
+    _inputUsername = [_usernameTextField.text trimmed];
+    _usernameTextField.text = _inputUsername;
+    
+    _inputEmail = [[_emailTextField.text trimmed] lowercaseStringWithLocale:[NSLocale currentLocale]];
+    _emailTextField.text = _inputEmail;
+    
+    NSArray *emailComponents = [_inputEmail componentsSeparatedByString:@"@"];
+    _inputFullname = emailComponents.count > 0 ? emailComponents.firstObject : _inputEmail;
+    
+    _inputPassword = _passwordTextField.text;
+}
+
+- (int) getInputType {
+    int nRet;
+    
+    [self updateAndCleanInput];
+    
+    switch (loginState) {
+        case LoginStateForgotPassword:
+            nRet = [self validateForgotPassword];
+            break;
+        case LoginStateSigningUp:
+            nRet = [self validateSigningUp];
+            break;
+        default:
+            //LoginStateLoggingIn
+            nRet = [self validateLoggingIn];
+            break;
+    }
+    return nRet;
+}
+
+
+- (int) validateForgotPassword {
+    if (_inputEmail.length == 0) {
+        return INPUT_EMAIL;
+    }
+    else if (![_inputEmail isValidEmail]) {
+        return INPUT_EMAIL_INVALID;
+    }
+    return INPUT_OK;
+}
+
+- (int)validateLoggingIn {
+    int nRet;
+    if (_inputEmail.length == 0) {
+        nRet = INPUT_EMAIL;
+    } else if (_inputPassword.length == 0) {
+        nRet = INPUT_PASSWORD;
+    } else {
+        nRet = INPUT_OK;
+    }
+    return nRet;
+}
+
+- (int)validateSigningUp {
+    int nRet;
+    if (_inputUsername.length == 0) {
+        nRet = INPUT_NAME;
+    }
+    else if (_inputEmail.length == 0) {
+        nRet = INPUT_EMAIL;
+    }
+    else if (![_inputEmail isValidEmail]) {
+        nRet = INPUT_EMAIL_INVALID;
+    }
+    else if (_inputPassword.length == 0) {
+        nRet = INPUT_PASSWORD;
+    }
+    else if (_inputPassword.length < 6) {
+        nRet = INPUT_PASSWORD_TOO_SHORT;
+    }
+    else {
+        nRet = INPUT_OK;
+    }
+    return nRet;
+}
+
+- (void) showAlertMessage:(int) type {
+    NSString* strTitle;
+    switch (type) {
+        case INPUT_CONNECTION_PROBLEM:
+            strTitle = @"We're sorry, there is a network issue. Please try again later";
+            break;
+        case INPUT_NAME:
+            strTitle = loginState == LoginStateLoggingIn ? @"Please enter your name" : @"Please enter a name";
+            break;
+        case INPUT_NAME_EXISTS:
+            strTitle = @"That username is taken, please choose another";
+            break;
+        case INPUT_PASSWORD:
+            strTitle = loginState == LoginStateLoggingIn ? @"Please enter your password" : @"Please enter a password";
+            break;
+        case INPUT_PASSWORD_TOO_SHORT:
+            strTitle = @"That password is too short, it must be at least 6 characters";
+            break;
+        case INPUT_EMAIL:
+            strTitle = @"Please enter your email address";
+            break;
+        case INPUT_EMAIL_INVALID:
+            strTitle = @"That email address is not valid";
+            break;
+        case INPUT_EMAIL_EXISTS:
+            strTitle = @"That email is already being used, please log in";
+            break;
+        default:
+            strTitle = @"";
+            break;
+    }
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:strTitle message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+}
+
 @end

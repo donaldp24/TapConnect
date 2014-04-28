@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
-@interface ViewController : UIViewController<UIActionSheetDelegate, CLLocationManagerDelegate>
+@class LoginViewController;
+
+@interface ViewController : UIViewController<UIActionSheetDelegate, CLLocationManagerDelegate, CBCentralManagerDelegate>
+
+@property (nonatomic, retain) LoginViewController *loginController;
 
 @end

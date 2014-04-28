@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D304D2C4190C412C005E7E78 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D304D2C3190C412C005E7E78 /* AudioToolbox.framework */; };
+		D304D2C6190C4133005E7E78 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D304D2C5190C4133005E7E78 /* CFNetwork.framework */; };
+		D304D2C8190C4142005E7E78 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D304D2C7190C4142005E7E78 /* MobileCoreServices.framework */; };
+		D304D2CA190C414E005E7E78 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D304D2C9190C414E005E7E78 /* Security.framework */; };
+		D304D2CC190C4156005E7E78 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D304D2CB190C4156005E7E78 /* StoreKit.framework */; };
+		D304D2CE190C415D005E7E78 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D304D2CD190C415D005E7E78 /* SystemConfiguration.framework */; };
+		D304D2D0190C417A005E7E78 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D304D2CF190C417A005E7E78 /* Parse.framework */; };
+		D30D8860190DE54E000D9F8A /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D30D885F190DE54E000D9F8A /* ProfileViewController.m */; };
 		D379A4BC1907BF6E002A7D1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379A4BB1907BF6E002A7D1F /* Foundation.framework */; };
 		D379A4BE1907BF6E002A7D1F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379A4BD1907BF6E002A7D1F /* CoreGraphics.framework */; };
 		D379A4C01907BF6E002A7D1F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379A4BF1907BF6E002A7D1F /* UIKit.framework */; };
@@ -33,6 +41,20 @@
 		D379A5171907FC72002A7D1F /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A50A1907FC72002A7D1F /* NSArray+MASAdditions.m */; };
 		D379A5181907FC72002A7D1F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A50D1907FC72002A7D1F /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		D379A5191907FC72002A7D1F /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A50F1907FC72002A7D1F /* View+MASAdditions.m */; };
+		D38E9359190D380000B2434B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38E9358190D380000B2434B /* FacebookSDK.framework */; };
+		D38E935E190D49F800B2434B /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D38E935B190D49F700B2434B /* SVProgressHUD.bundle */; };
+		D38E935F190D49F800B2434B /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E935D190D49F700B2434B /* SVProgressHUD.m */; };
+		D38E9383190D533F00B2434B /* NSString+Knotable.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E9373190D533F00B2434B /* NSString+Knotable.m */; };
+		D38E9384190D533F00B2434B /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E9375190D533F00B2434B /* UIImage+Alpha.m */; };
+		D38E9385190D533F00B2434B /* UIImage+Knotable.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E9377190D533F00B2434B /* UIImage+Knotable.m */; };
+		D38E9386190D533F00B2434B /* UIImage+ProportionalFill.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E9379190D533F00B2434B /* UIImage+ProportionalFill.m */; };
+		D38E9387190D533F00B2434B /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E937B190D533F00B2434B /* UIImage+Resize.m */; };
+		D38E9388190D533F00B2434B /* UIImage+Retina4.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E937D190D533F00B2434B /* UIImage+Retina4.m */; };
+		D38E9389190D533F00B2434B /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E937F190D533F00B2434B /* UIImage+RoundedCorner.m */; };
+		D38E938A190D533F00B2434B /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E9381190D533F00B2434B /* UIImage+Tint.m */; };
+		D38E938E190D5FBC00B2434B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E938D190D5FBC00B2434B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D38E9391190D605000B2434B /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E9390190D605000B2434B /* Common.m */; };
+		D38E9394190D6E5E00B2434B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E9393190D6E5E00B2434B /* User.m */; };
 		D3B7641519091A8A00BF9C7A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B7641419091A8A00BF9C7A /* CoreBluetooth.framework */; };
 		D3B76417190920D300BF9C7A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B76416190920D300BF9C7A /* CoreLocation.framework */; };
 		D3E25E8C1909BAC9008E097F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E25E8B1909BAC9008E097F /* libz.dylib */; };
@@ -50,6 +72,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D304D2C3190C412C005E7E78 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D304D2C5190C4133005E7E78 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D304D2C7190C4142005E7E78 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		D304D2C9190C414E005E7E78 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D304D2CB190C4156005E7E78 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		D304D2CD190C415D005E7E78 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D304D2CF190C417A005E7E78 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Library/Parse.framework; sourceTree = "<group>"; };
+		D30D885E190DE54E000D9F8A /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		D30D885F190DE54E000D9F8A /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		D379A4B81907BF6E002A7D1F /* TapConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D379A4BB1907BF6E002A7D1F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D379A4BD1907BF6E002A7D1F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -96,6 +127,32 @@
 		D379A50E1907FC72002A7D1F /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "View+MASAdditions.h"; path = "Library/Masonry/View+MASAdditions.h"; sourceTree = "<group>"; };
 		D379A50F1907FC72002A7D1F /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "View+MASAdditions.m"; path = "Library/Masonry/View+MASAdditions.m"; sourceTree = "<group>"; };
 		D379A5101907FC72002A7D1F /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Library/Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		D38E9358190D380000B2434B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = Library/FacebookSDK.framework; sourceTree = "<group>"; };
+		D38E935B190D49F700B2434B /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SVProgressHUD.bundle; path = Library/SVProgressHUD/SVProgressHUD.bundle; sourceTree = "<group>"; };
+		D38E935C190D49F700B2434B /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = Library/SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
+		D38E935D190D49F700B2434B /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVProgressHUD.m; path = Library/SVProgressHUD/SVProgressHUD.m; sourceTree = "<group>"; };
+		D38E9372190D533F00B2434B /* NSString+Knotable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Knotable.h"; path = "Library/Categories/NSString+Knotable.h"; sourceTree = "<group>"; };
+		D38E9373190D533F00B2434B /* NSString+Knotable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Knotable.m"; path = "Library/Categories/NSString+Knotable.m"; sourceTree = "<group>"; };
+		D38E9374190D533F00B2434B /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "Library/Categories/UIImage+Alpha.h"; sourceTree = "<group>"; };
+		D38E9375190D533F00B2434B /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Alpha.m"; path = "Library/Categories/UIImage+Alpha.m"; sourceTree = "<group>"; };
+		D38E9376190D533F00B2434B /* UIImage+Knotable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Knotable.h"; path = "Library/Categories/UIImage+Knotable.h"; sourceTree = "<group>"; };
+		D38E9377190D533F00B2434B /* UIImage+Knotable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Knotable.m"; path = "Library/Categories/UIImage+Knotable.m"; sourceTree = "<group>"; };
+		D38E9378190D533F00B2434B /* UIImage+ProportionalFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ProportionalFill.h"; path = "Library/Categories/UIImage+ProportionalFill.h"; sourceTree = "<group>"; };
+		D38E9379190D533F00B2434B /* UIImage+ProportionalFill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ProportionalFill.m"; path = "Library/Categories/UIImage+ProportionalFill.m"; sourceTree = "<group>"; };
+		D38E937A190D533F00B2434B /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Library/Categories/UIImage+Resize.h"; sourceTree = "<group>"; };
+		D38E937B190D533F00B2434B /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Library/Categories/UIImage+Resize.m"; sourceTree = "<group>"; };
+		D38E937C190D533F00B2434B /* UIImage+Retina4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Retina4.h"; path = "Library/Categories/UIImage+Retina4.h"; sourceTree = "<group>"; };
+		D38E937D190D533F00B2434B /* UIImage+Retina4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Retina4.m"; path = "Library/Categories/UIImage+Retina4.m"; sourceTree = "<group>"; };
+		D38E937E190D533F00B2434B /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "Library/Categories/UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		D38E937F190D533F00B2434B /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "Library/Categories/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		D38E9380190D533F00B2434B /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Tint.h"; path = "Library/Categories/UIImage+Tint.h"; sourceTree = "<group>"; };
+		D38E9381190D533F00B2434B /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Tint.m"; path = "Library/Categories/UIImage+Tint.m"; sourceTree = "<group>"; };
+		D38E938C190D5FBC00B2434B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Library/Reachability/Reachability.h; sourceTree = "<group>"; };
+		D38E938D190D5FBC00B2434B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Library/Reachability/Reachability.m; sourceTree = "<group>"; };
+		D38E938F190D605000B2434B /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		D38E9390190D605000B2434B /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		D38E9392190D6E5E00B2434B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		D38E9393190D6E5E00B2434B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		D3B7641419091A8A00BF9C7A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D3B76416190920D300BF9C7A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D3CA30E01909B7460006C761 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = TapConnect/TestFlight/TestFlight.h; sourceTree = "<group>"; };
@@ -111,6 +168,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D38E9359190D380000B2434B /* FacebookSDK.framework in Frameworks */,
+				D304D2D0190C417A005E7E78 /* Parse.framework in Frameworks */,
+				D304D2CE190C415D005E7E78 /* SystemConfiguration.framework in Frameworks */,
+				D304D2CC190C4156005E7E78 /* StoreKit.framework in Frameworks */,
+				D304D2CA190C414E005E7E78 /* Security.framework in Frameworks */,
+				D304D2C8190C4142005E7E78 /* MobileCoreServices.framework in Frameworks */,
+				D304D2C6190C4133005E7E78 /* CFNetwork.framework in Frameworks */,
+				D304D2C4190C412C005E7E78 /* AudioToolbox.framework in Frameworks */,
 				D3E25E8C1909BAC9008E097F /* libz.dylib in Frameworks */,
 				D3B76417190920D300BF9C7A /* CoreLocation.framework in Frameworks */,
 				D3B7641519091A8A00BF9C7A /* CoreBluetooth.framework in Frameworks */,
@@ -158,6 +223,14 @@
 		D379A4BA1907BF6E002A7D1F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D38E9358190D380000B2434B /* FacebookSDK.framework */,
+				D304D2CF190C417A005E7E78 /* Parse.framework */,
+				D304D2CD190C415D005E7E78 /* SystemConfiguration.framework */,
+				D304D2CB190C4156005E7E78 /* StoreKit.framework */,
+				D304D2C9190C414E005E7E78 /* Security.framework */,
+				D304D2C7190C4142005E7E78 /* MobileCoreServices.framework */,
+				D304D2C5190C4133005E7E78 /* CFNetwork.framework */,
+				D304D2C3190C412C005E7E78 /* AudioToolbox.framework */,
 				D3E25E8B1909BAC9008E097F /* libz.dylib */,
 				D3E25E891909B7DD008E097F /* libTestFlight.a */,
 				D3B76416190920D300BF9C7A /* CoreLocation.framework */,
@@ -186,6 +259,12 @@
 				D379A4F41907F692002A7D1F /* LoginViewController.m */,
 				D379A4F61907F768002A7D1F /* DesignManager.h */,
 				D379A4F71907F768002A7D1F /* DesignManager.m */,
+				D38E938F190D605000B2434B /* Common.h */,
+				D38E9390190D605000B2434B /* Common.m */,
+				D38E9392190D6E5E00B2434B /* User.h */,
+				D38E9393190D6E5E00B2434B /* User.m */,
+				D30D885E190DE54E000D9F8A /* ProfileViewController.h */,
+				D30D885F190DE54E000D9F8A /* ProfileViewController.m */,
 			);
 			path = TapConnect;
 			sourceTree = "<group>";
@@ -222,6 +301,9 @@
 		D379A4F91907FC54002A7D1F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				D38E938B190D5FA500B2434B /* Reachability */,
+				D38E9360190D531F00B2434B /* Categories */,
+				D38E935A190D49ED00B2434B /* SVProgressHUD */,
 				D379A4FA1907FC5D002A7D1F /* Masorny */,
 			);
 			name = Library;
@@ -254,6 +336,48 @@
 				D379A5101907FC72002A7D1F /* View+MASShorthandAdditions.h */,
 			);
 			name = Masorny;
+			sourceTree = "<group>";
+		};
+		D38E935A190D49ED00B2434B /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				D38E935B190D49F700B2434B /* SVProgressHUD.bundle */,
+				D38E935C190D49F700B2434B /* SVProgressHUD.h */,
+				D38E935D190D49F700B2434B /* SVProgressHUD.m */,
+			);
+			name = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		D38E9360190D531F00B2434B /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				D38E9372190D533F00B2434B /* NSString+Knotable.h */,
+				D38E9373190D533F00B2434B /* NSString+Knotable.m */,
+				D38E9374190D533F00B2434B /* UIImage+Alpha.h */,
+				D38E9375190D533F00B2434B /* UIImage+Alpha.m */,
+				D38E9376190D533F00B2434B /* UIImage+Knotable.h */,
+				D38E9377190D533F00B2434B /* UIImage+Knotable.m */,
+				D38E9378190D533F00B2434B /* UIImage+ProportionalFill.h */,
+				D38E9379190D533F00B2434B /* UIImage+ProportionalFill.m */,
+				D38E937A190D533F00B2434B /* UIImage+Resize.h */,
+				D38E937B190D533F00B2434B /* UIImage+Resize.m */,
+				D38E937C190D533F00B2434B /* UIImage+Retina4.h */,
+				D38E937D190D533F00B2434B /* UIImage+Retina4.m */,
+				D38E937E190D533F00B2434B /* UIImage+RoundedCorner.h */,
+				D38E937F190D533F00B2434B /* UIImage+RoundedCorner.m */,
+				D38E9380190D533F00B2434B /* UIImage+Tint.h */,
+				D38E9381190D533F00B2434B /* UIImage+Tint.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		D38E938B190D5FA500B2434B /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				D38E938C190D5FBC00B2434B /* Reachability.h */,
+				D38E938D190D5FBC00B2434B /* Reachability.m */,
+			);
+			name = Reachability;
 			sourceTree = "<group>";
 		};
 		D3CA30DF1909B7360006C761 /* TestFlight */ = {
@@ -342,6 +466,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D38E935E190D49F800B2434B /* SVProgressHUD.bundle in Resources */,
 				D379A4D21907BF6E002A7D1F /* Main_iPad.storyboard in Resources */,
 				D379A4D71907BF6E002A7D1F /* Images.xcassets in Resources */,
 				D379A4CF1907BF6E002A7D1F /* Main_iPhone.storyboard in Resources */,
@@ -364,20 +489,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D38E9394190D6E5E00B2434B /* User.m in Sources */,
 				D379A5181907FC72002A7D1F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				D379A4F51907F692002A7D1F /* LoginViewController.m in Sources */,
+				D38E935F190D49F800B2434B /* SVProgressHUD.m in Sources */,
 				D379A5161907FC72002A7D1F /* MASViewConstraint.m in Sources */,
+				D38E9383190D533F00B2434B /* NSString+Knotable.m in Sources */,
 				D379A4D51907BF6E002A7D1F /* ViewController.m in Sources */,
 				D379A4CC1907BF6E002A7D1F /* AppDelegate.m in Sources */,
+				D38E938A190D533F00B2434B /* UIImage+Tint.m in Sources */,
 				D379A4C81907BF6E002A7D1F /* main.m in Sources */,
+				D38E9386190D533F00B2434B /* UIImage+ProportionalFill.m in Sources */,
+				D38E938E190D5FBC00B2434B /* Reachability.m in Sources */,
+				D38E9389190D533F00B2434B /* UIImage+RoundedCorner.m in Sources */,
+				D38E9391190D605000B2434B /* Common.m in Sources */,
 				D379A5191907FC72002A7D1F /* View+MASAdditions.m in Sources */,
 				D379A5111907FC72002A7D1F /* MASCompositeConstraint.m in Sources */,
 				D379A5151907FC72002A7D1F /* MASViewAttribute.m in Sources */,
 				D379A5131907FC72002A7D1F /* MASConstraintMaker.m in Sources */,
 				D379A5171907FC72002A7D1F /* NSArray+MASAdditions.m in Sources */,
+				D30D8860190DE54E000D9F8A /* ProfileViewController.m in Sources */,
+				D38E9385190D533F00B2434B /* UIImage+Knotable.m in Sources */,
 				D379A5121907FC72002A7D1F /* MASConstraint.m in Sources */,
+				D38E9384190D533F00B2434B /* UIImage+Alpha.m in Sources */,
 				D379A5141907FC72002A7D1F /* MASLayoutConstraint.m in Sources */,
 				D379A4F81907F768002A7D1F /* DesignManager.m in Sources */,
+				D38E9387190D533F00B2434B /* UIImage+Resize.m in Sources */,
+				D38E9388190D533F00B2434B /* UIImage+Retina4.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +654,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				FRAMEWORK_SEARCH_PATHS = "$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+					/Users/RyuCJ/Documents/FacebookSDK,
+					/Users/RyuCJ/work/TapConnect/Library,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TapConnect/TapConnect-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -541,7 +683,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				FRAMEWORK_SEARCH_PATHS = "$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+					/Users/RyuCJ/Documents/FacebookSDK,
+					/Users/RyuCJ/work/TapConnect/Library,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TapConnect/TapConnect-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "";

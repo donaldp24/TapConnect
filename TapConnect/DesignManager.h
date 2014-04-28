@@ -15,4 +15,6 @@
 
 + (NSString *)getMainTitle;
 
++ (NSString *)getStringNoConnectivity;
+
 @end
