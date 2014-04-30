@@ -18,8 +18,10 @@
 
 #define ENABLE_RECORDING_OUT    0
 #define ENABLE_RECORDING_MOVE   0
+#define ENTER_WHEN_NEAR         1
 
 #define kAnimTimeInterval   1
+
 
 
 @interface ViewController () {
@@ -128,12 +130,8 @@
 }
 
 - (void)initRegion {
-#if true
+
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
-#else
-    // for testing
-    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"23542266-18D1-4FE4-B4A1-23F8195B9D39"];
-#endif
     self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
                                                            identifier:@"com.app.BeaconRegion"];
     [self.locationManager startMonitoringForRegion:self.beaconRegion];
@@ -228,7 +226,11 @@
     }
     else
     {
+#if ENTER_WHEN_NEAR
+        if (beacon.proximity == CLProximityUnknown || beacon.proximity == CLProximityFar || beacon.proximity == CLProximityNear)
+#else
         if (beacon.proximity == CLProximityUnknown)
+#endif
         {
             animIndex = 0;
             
@@ -268,7 +270,10 @@
                 currMajor = currMinor = -1;
                 
                 self.lblStatus.text = @"user exited in a range of beacon";
+                
+                NSLog(@"exited -------------------- \n");
             }
+            
         }
         else
         {
@@ -331,7 +336,6 @@
                 
                 self.lblStatus.text = @"user entered in a range of beacon";
             }
-
         }
     }
     
