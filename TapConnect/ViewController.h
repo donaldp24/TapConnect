@@ -12,7 +12,7 @@
 
 @class LoginViewController;
 
-@interface ViewController : UIViewController<UIActionSheetDelegate, CLLocationManagerDelegate, CBCentralManagerDelegate>
+@interface ViewController : UIViewController<UIActionSheetDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, retain) LoginViewController *loginController;
 

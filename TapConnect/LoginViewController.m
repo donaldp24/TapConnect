@@ -277,7 +277,7 @@ enum  {
     _emailTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     _emailTextField.spellCheckingType = UITextSpellCheckingTypeNo;
     
-    _usernameTextField = [self loginTextFieldForIcon:@"login-username" placeholder:@"USERNAME"];
+    _usernameTextField = [self loginTextFieldForIcon:@"login-username" placeholder:@"FULL NAME"];
     _usernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     _usernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     _usernameTextField.spellCheckingType = UITextSpellCheckingTypeNo;
@@ -552,7 +552,7 @@ enum  {
         PFUser *user = [PFUser user];
         user.username = _inputEmail;
         user.password = _inputPassword;
-        user[@"displayname"] = _inputUsername;
+        user[@"fullname"] = _inputUsername;
         user[@"usertype"] = [NSString stringWithFormat:@"%d", UserTypeNative];
 
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

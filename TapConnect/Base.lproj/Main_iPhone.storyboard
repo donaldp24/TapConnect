@@ -75,9 +75,13 @@
                                 <rect key="frame" x="79" y="239" width="162" height="89"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bluetoothicon" translatesAutoresizingMaskIntoConstraints="NO" id="Glt-4t-ou8">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bluetoothicon" translatesAutoresizingMaskIntoConstraints="NO" id="Glt-4t-ou8">
                                 <rect key="frame" x="61" y="205" width="198" height="157"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="198" id="BYB-He-N5g"/>
+                                    <constraint firstAttribute="height" constant="157" id="v6L-lv-IQx"/>
+                                </constraints>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8YB-yX-AaP">
                                 <rect key="frame" x="0.0" y="392" width="320" height="39"/>
@@ -89,17 +93,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="524-81-hwb" secondAttribute="trailing" id="0Sc-nu-Pnz"/>
                             <constraint firstItem="524-81-hwb" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Py2-PL-LGd"/>
+                            <constraint firstAttribute="trailing" secondItem="524-81-hwb" secondAttribute="trailing" id="bm6-FV-ntV"/>
+                            <constraint firstItem="Glt-4t-ou8" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="61" id="v4K-oW-dwN"/>
                             <constraint firstItem="ZTs-2t-Oyf" firstAttribute="top" secondItem="524-81-hwb" secondAttribute="bottom" id="vEE-mr-sm6"/>
+                            <constraint firstItem="Glt-4t-ou8" firstAttribute="top" secondItem="LtQ-12-O2J" secondAttribute="bottom" constant="161" id="vuG-2d-rcz"/>
                             <constraint firstItem="524-81-hwb" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="xh4-bK-3SP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sEM-m9-40K"/>
-                    <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="imgviewAlertBg" destination="aDC-x7-ktW" id="zIq-BN-lft"/>
                         <outlet property="imgviewBluetoothIcon" destination="Glt-4t-ou8" id="jt0-sz-3b8"/>
+                        <outlet property="lblStatus" destination="8YB-yX-AaP" id="AE6-bs-U0n"/>
                         <segue destination="fXZ-kl-V5m" kind="push" identifier="toprofile" id="X74-fP-6AM"/>
                     </connections>
                 </viewController>

@@ -13,11 +13,29 @@
 #import "User.h"
 #import "Common.h"
 
-@interface ViewController ()
+
+#define kDuplicateInterval      3
+
+#define ENABLE_RECORDING_OUT    0
+#define ENABLE_RECORDING_MOVE   0
+
+#define kAnimTimeInterval   1
+
+
+@interface ViewController () {
+    NSDate *enterTime;
+    NSDate *exitTime;
+    
+    int currMajor;
+    int currMinor;
+    
+    NSTimer *animTimer;
+    int animIndex;
+    NSMutableArray *bluetoothIcons;
+}
 
 @property (retain, nonatomic) CLBeaconRegion *beaconRegion;
 @property (retain, nonatomic) CLLocationManager *locationManager;
-@property (nonatomic, retain) CBCentralManager *bluetoothCentralManager;
 @property (nonatomic, readwrite) BOOL isBluetoothOn;
 @property (nonatomic, retain) IBOutlet UIImageView *imgviewAlertBg;
 @property (nonatomic, retain) IBOutlet UIImageView *imgviewBluetoothIcon;
@@ -43,19 +61,36 @@
     UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settingsicon"] style:UIBarButtonItemStylePlain target:self action:@selector(settingsPressed:)];
     self.navigationItem.leftBarButtonItem = settingsButton;
     
+    
+    enterTime = nil;
+    exitTime = nil;
+    
+    currMajor = -1;
+    currMinor = -1;
+    
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self initRegion];
     
-    //self.bluetoothCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-    
-    self.isBluetoothOn = NO;
+    self.isBluetoothOn = YES;
     [self refreshBluetoothStatus];
-}
-
-- (void)dealloc
-{
-    // self.bluetoothCentralManager.delegate = nil;
+    
+    // load images
+    UIImage *image = [UIImage imageNamed:@"bluetoothicon"];
+    
+    bluetoothIcons = [[NSMutableArray alloc] init];
+    UIImage *image1 = [UIImage imageNamed:@"bluetoothicon1"];
+    UIImage *image2 = [UIImage imageNamed:@"bluetoothicon2"];
+    UIImage *image3 = [UIImage imageNamed:@"bluetoothicon3"];
+    UIImage *image4 = [UIImage imageNamed:@"bluetoothicon4"];
+    
+    [bluetoothIcons addObject:image];
+    [bluetoothIcons addObject:image1];
+    [bluetoothIcons addObject:image2];
+    [bluetoothIcons addObject:image3];
+    [bluetoothIcons addObject:image4];
+    
+    animIndex = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -72,7 +107,7 @@
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithWhite:1.0 alpha:0.5];
     
-    [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
+    animTimer = [NSTimer scheduledTimerWithTimeInterval:kAnimTimeInterval target:self selector:@selector(timerProc:) userInfo:nil repeats:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -80,6 +115,10 @@
     [super viewDidDisappear:animated];
     
     [self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
+    [self.locationManager stopMonitoringForRegion:self.beaconRegion];
+    
+    [animTimer invalidate];
+    animTimer = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,13 +128,14 @@
 }
 
 - (void)initRegion {
+#if true
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
+#else
+    // for testing
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"23542266-18D1-4FE4-B4A1-23F8195B9D39"];
+#endif
     self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
-                                                           identifier:@"com.app.beaconRegion"];
-    self.beaconRegion.notifyEntryStateOnDisplay = NO; //Used for Monitoring
-    self.beaconRegion.notifyOnEntry = YES; //Used for Monitoring
-    self.beaconRegion.notifyOnExit = YES; //Used for Monitoring
-    
+                                                           identifier:@"com.app.BeaconRegion"];
     [self.locationManager startMonitoringForRegion:self.beaconRegion];
 }
 
@@ -169,39 +209,132 @@
 #pragma mark - Location Manager delegate
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
-
-    User *user = [User currentUser];
-    
-    self.lblStatus.text = @"close with a beacon";
-    if (user)
-    {
-        PFObject *event = [PFObject objectWithClassName:@"Events"];
-        event[@"email"] = user.email;
-        event[@"type"] = @"in";
-        event[@"localtime"] = [Common date2str:[NSDate date] withFormat:DATETIME_FORMAT];
-        [event saveInBackground];
-    }
+    //self.lblStatus.text = @"user entered in a range of beacon";
 }
 
 -(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
     [self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
-    
-    User *user = [User currentUser];
-    
-    self.lblStatus.text = @"out of range of beacon";
-    if (user)
-    {
-        PFObject *event = [PFObject objectWithClassName:@"Events"];
-        event[@"email"] = user.email;
-        event[@"type"] = @"out";
-        event[@"localtime"] = [Common date2str:[NSDate date] withFormat:DATETIME_FORMAT];
-        [event saveInBackground];
-    }
+    //self.lblStatus.text = @"user exited in a range of beacon";
+
 }
 
 -(void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
     CLBeacon *beacon;// = [[CLBeacon alloc] init];
-    beacon = [beacons lastObject];
+    beacon = [beacons firstObject];
+    
+    if (beacon == nil)
+    {
+        //
+    }
+    else
+    {
+        if (beacon.proximity == CLProximityUnknown)
+        {
+            animIndex = 0;
+            
+            if (currMajor != -1 && currMinor != -1)
+            {
+                // ------ duplicate checking -----------
+                NSDate *currDate = [NSDate date];
+                
+                BOOL isDuplicated = YES;
+                if (exitTime == nil)
+                    isDuplicated = NO;
+                else
+                {
+                    NSTimeInterval secs = [currDate timeIntervalSinceDate:exitTime];
+                    if (secs < kDuplicateInterval)
+                        isDuplicated = YES;
+                    else
+                        isDuplicated = NO;
+                }
+                exitTime = currDate;
+                
+#if ENABLE_RECORDING_OUT
+                User *user = [User currentUser];
+                if (user)
+                {
+                    PFObject *event = [PFObject objectWithClassName:@"Events"];
+                    event[@"email"] = user.email;
+                    event[@"type"] = @"out of range";
+                    event[@"uuid"] = beacon.proximityUUID.UUIDString;
+                    event[@"major"] = [NSString stringWithFormat:@"%d", /*[beacon.major intValue]*/ currMajor];
+                    event[@"minior"] = [NSString stringWithFormat:@"%d", /*[beacon.minor intValue]*/ currMinor];
+                    event[@"localtime"] = [Common date2str:[NSDate date] withFormat:DATETIME_FORMAT];
+                    [event saveInBackground];
+                }
+#endif
+                
+                currMajor = currMinor = -1;
+                
+                self.lblStatus.text = @"user exited in a range of beacon";
+            }
+        }
+        else
+        {
+            animIndex = (animIndex + 1) % [bluetoothIcons count];
+            
+            if (currMajor != [beacon.major intValue] || currMinor != [beacon.minor intValue]) {
+                
+                // ------ duplicate checking -----------
+                NSDate *currDate = [NSDate date];
+                
+                BOOL isDuplicated = YES;
+                if (enterTime == nil)
+                    isDuplicated = NO;
+                else
+                {
+                    NSTimeInterval secs = [currDate timeIntervalSinceDate:enterTime];
+                    if (secs < kDuplicateInterval)
+                        isDuplicated = YES;
+                    else
+                        isDuplicated = NO;
+                }
+                enterTime = currDate;
+                
+                // --------
+                User *user = [User currentUser];
+                
+                if (user && !isDuplicated)
+                {
+                    PFObject *event = [PFObject objectWithClassName:@"Events"];
+                    event[@"email"] = user.email;
+                    BOOL isEnter = NO;
+                    if (currMajor == -1 && currMinor == -1)
+                    {
+                        event[@"type"] = @"enter into range";
+                        isEnter = YES;
+                    }
+                    else
+                    {
+                        event[@"type"] = @"move in range";
+                        isEnter = NO;
+                    }
+                    event[@"uuid"] = beacon.proximityUUID.UUIDString;
+                    event[@"major"] = [NSString stringWithFormat:@"%d", [beacon.major intValue]];
+                    event[@"minior"] = [NSString stringWithFormat:@"%d", [beacon.minor intValue]];
+                    event[@"localtime"] = [Common date2str:[NSDate date] withFormat:DATETIME_FORMAT];
+                    if (isEnter == NO)
+                    {
+#if ENABLE_RECORDING_MOVE
+                        [event saveInBackground];
+#endif
+                    }
+                    else
+                    {
+                        [event saveInBackground];
+                    }
+                }
+                
+                currMajor = [beacon.major intValue];
+                currMinor = [beacon.minor intValue];
+                
+                self.lblStatus.text = @"user entered in a range of beacon";
+            }
+
+        }
+    }
+    
     
     /*
      self.beaconFoundLabel.text = @"Yes";
@@ -222,56 +355,8 @@
      */
 }
 
-#pragma mark - Bluetooth
-
-- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
-    
-    NSString *stateDescription = nil;
-    NSString *stateAlert = nil;
-    self.isBluetoothOn = NO;
-    switch ([central state]) {
-        case CBCentralManagerStateResetting:
-            stateDescription = [NSString stringWithFormat:@"CBCentralManagerStateResetting %d ", central.state];
-            break;
-        case CBCentralManagerStateUnsupported:
-            stateDescription = [NSString stringWithFormat:@"CBCentralManagerStateUnsupported %d ", central.state];
-            stateAlert = @"This device does not support Bluetooth low energy.";
-            break;
-        case CBCentralManagerStateUnauthorized:
-            stateDescription = [NSString stringWithFormat:@"CBCentralManagerStateUnauthorized %d ", central.state];
-            stateAlert = @"This app is not authorized to use Bluetooth low energy.\n\nAuthorize in Settings > Bluetooth.";
-            break;
-        case CBCentralManagerStatePoweredOff:
-            stateDescription = [NSString stringWithFormat:@"CBCentralManagerStatePoweredOff %d ", central.state];
-            stateAlert = @"Bluetooth is currently powered off.\n\nPower ON the bluetooth in Settings > Bluetooth.";
-            break;
-        case CBCentralManagerStatePoweredOn:
-            stateDescription = [NSString stringWithFormat:@"CBCentralManagerStatePoweredOn %d ", central.state];
-            self.isBluetoothOn = YES;
-            break;
-        case CBCentralManagerStateUnknown:
-            stateDescription = [NSString stringWithFormat:@"CBCentralManagerStateUnknown %d ", central.state];
-            stateAlert = @"Bluetooth state unknown";
-            break;
-        default:
-            stateDescription = [NSString stringWithFormat:@"CBCentralManager Undefined %d ", central.state];
-            stateAlert = @"Bluetooth state undefined";
-            break;
-    }
-    
-    NSLog(@"centralManagerDidUpdateState:[%@]", stateDescription);
-    
-    [self performSelectorOnMainThread:@selector(refreshBluetoothStatus) withObject:nil waitUntilDone:NO];
-    
-}
-
-- (void)centralManager:(CBCentralManager *)central
- didDiscoverPeripheral:(CBPeripheral *)peripheral
-     advertisementData:(NSDictionary *)advertisementData
-                  RSSI:(NSNumber *)RSSI
-{
-    NSLog(@"%@",[NSString stringWithFormat:@"didDiscoverPeripheral:name=[%@]",
-                 peripheral.name]);
+- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
+    [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
 }
 
 #pragma mark - show/hide bluetooth status
@@ -279,6 +364,12 @@
 {
     self.imgviewAlertBg.hidden = self.isBluetoothOn;
     self.imgviewBluetoothIcon.hidden = !self.isBluetoothOn;
+}
+
+#pragma mark - Timer Proc
+- (void)timerProc: (NSTimer *)timer
+{
+    [self.imgviewBluetoothIcon setImage:[bluetoothIcons objectAtIndex:animIndex]];
 }
 
 
