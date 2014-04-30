@@ -116,9 +116,6 @@
 {
     [super viewDidDisappear:animated];
     
-    [self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
-    [self.locationManager stopMonitoringForRegion:self.beaconRegion];
-    
     [animTimer invalidate];
     animTimer = nil;
 }
@@ -187,6 +184,9 @@
         // The session state handler (in the app delegate) will be called automatically
         [FBSession.activeSession closeAndClearTokenInformation];
     }
+    
+    [self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
+    [self.locationManager stopMonitoringForRegion:self.beaconRegion];
     
     [self.loginController reset];
     

@@ -618,7 +618,7 @@ enum  {
                          PFUser *user = [PFUser user];
                          user.username = [result objectForKey:@"email"];
                          user.password = [result objectForKey:@"id"];
-                         user[@"displayname"] = [result objectForKey:@"name"];
+                         user[KEY_DISPLAYNAME] = [result objectForKey:@"name"];
                          user[@"usertype"] = [NSString stringWithFormat:@"%d", UserTypeFB];
 
                          [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

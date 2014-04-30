@@ -11,7 +11,7 @@
 #define KEY_USERTYPE        @"usertype"
 #define KEY_EMAIL           @"email"
 #define KEY_PWD             @"pwd"
-#define KEY_DISPLAYNAME     @"displayname"
+#define KEY_DISPLAYNAME     @"fullname"
 
 static User *_currentUser;
 
@@ -60,7 +60,7 @@ static User *_currentUser;
     User *user = [[User alloc] init];
     user.email = pfUser.username;
     user.pwd = pfUser.password;
-    user.displayName = pfUser[@"displayname"];
+    user.displayName = pfUser[@"fullname"];
     user.userType = UserTypeNative;
 
     return user;
