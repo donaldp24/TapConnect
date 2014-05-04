@@ -9,7 +9,7 @@ iOS application for ranging beacons and uploading information of guests
 ![Main Bluetooth Screen](/ScreenShots/03_mainbluetooth.png "Main Bluetooth Screen")
 ![Settings Menu Screen](/ScreenShots/04_settingsmenu.png "Settings Menu Screen")
 
-Log events of users when users get close [Estimote iBeacon][estimote_ibeacon]!
+Log events of users when users get close [Estimote iBeacon][estimote_ibeacon].
 
 The app uses [Parse.com][parse_com] as its backend and logs events of users. 
 
@@ -20,3 +20,4 @@ Stores setup iBeacons in front of several regions. Customers install the app and
 
 
 [estimote_ibeacon]: http://estimote.com
+[parse_com]: https://parse.com
