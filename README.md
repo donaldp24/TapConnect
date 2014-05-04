@@ -18,4 +18,5 @@ The app uses [Parse.com][parse_com] as its backend and logs events of users.
 Stores setup iBeacons in front of several regions. Customers install the app and when customers enter a certain region of store, "enter" event will be recorded. Manager of the store will see how many customers enter in a certain region and when they entered and so on...
 
 
-[estimote_ibeacon] : http://estimote.com
+
+[estimote_ibeacon]: http://estimote.com
