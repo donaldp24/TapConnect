@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D30266351914850C00D4F187 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30266341914850C00D4F187 /* FacebookSDK.framework */; };
+		D3026637191485A200D4F187 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3026636191485A200D4F187 /* Parse.framework */; };
+		D3026639191485AA00D4F187 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3026638191485AA00D4F187 /* CFNetwork.framework */; };
+		D302663B191485B200D4F187 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D302663A191485B200D4F187 /* MobileCoreServices.framework */; };
+		D302663D191485BF00D4F187 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D302663C191485BF00D4F187 /* Security.framework */; };
+		D302663F191485C600D4F187 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D302663E191485C600D4F187 /* StoreKit.framework */; };
+		D3026641191485CD00D4F187 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3026640191485CD00D4F187 /* SystemConfiguration.framework */; };
 		D304D2C4190C412C005E7E78 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D304D2C3190C412C005E7E78 /* AudioToolbox.framework */; };
-		D304D2C6190C4133005E7E78 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D304D2C5190C4133005E7E78 /* CFNetwork.framework */; };
-		D304D2C8190C4142005E7E78 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D304D2C7190C4142005E7E78 /* MobileCoreServices.framework */; };
-		D304D2CA190C414E005E7E78 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D304D2C9190C414E005E7E78 /* Security.framework */; };
-		D304D2CC190C4156005E7E78 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D304D2CB190C4156005E7E78 /* StoreKit.framework */; };
-		D304D2CE190C415D005E7E78 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D304D2CD190C415D005E7E78 /* SystemConfiguration.framework */; };
-		D304D2D0190C417A005E7E78 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D304D2CF190C417A005E7E78 /* Parse.framework */; };
 		D30D8860190DE54E000D9F8A /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D30D885F190DE54E000D9F8A /* ProfileViewController.m */; };
+		D316FE6A1917347900539B12 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D316FE691917347900539B12 /* libTestFlight.a */; };
+		D33CDD00191D2F0A009745B5 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = D33CDCFF191D2F0A009745B5 /* iTunesArtwork */; };
 		D379A4BC1907BF6E002A7D1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379A4BB1907BF6E002A7D1F /* Foundation.framework */; };
 		D379A4BE1907BF6E002A7D1F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379A4BD1907BF6E002A7D1F /* CoreGraphics.framework */; };
 		D379A4C01907BF6E002A7D1F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379A4BF1907BF6E002A7D1F /* UIKit.framework */; };
@@ -41,7 +44,6 @@
 		D379A5171907FC72002A7D1F /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A50A1907FC72002A7D1F /* NSArray+MASAdditions.m */; };
 		D379A5181907FC72002A7D1F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A50D1907FC72002A7D1F /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		D379A5191907FC72002A7D1F /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D379A50F1907FC72002A7D1F /* View+MASAdditions.m */; };
-		D38E9359190D380000B2434B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38E9358190D380000B2434B /* FacebookSDK.framework */; };
 		D38E935E190D49F800B2434B /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D38E935B190D49F700B2434B /* SVProgressHUD.bundle */; };
 		D38E935F190D49F800B2434B /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E935D190D49F700B2434B /* SVProgressHUD.m */; };
 		D38E9383190D533F00B2434B /* NSString+Knotable.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E9373190D533F00B2434B /* NSString+Knotable.m */; };
@@ -57,6 +59,10 @@
 		D38E9394190D6E5E00B2434B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E9393190D6E5E00B2434B /* User.m */; };
 		D3B7641519091A8A00BF9C7A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B7641419091A8A00BF9C7A /* CoreBluetooth.framework */; };
 		D3B76417190920D300BF9C7A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B76416190920D300BF9C7A /* CoreLocation.framework */; };
+		D3D8233719149AED00735120 /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D8233519149AED00735120 /* libAdIdAccess.a */; };
+		D3D8233819149AED00735120 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D8233619149AED00735120 /* libGoogleAnalyticsServices.a */; };
+		D3D8233A19149C3100735120 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D8233919149C3100735120 /* CoreData.framework */; };
+		D3D8233C19149C3E00735120 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D8233B19149C3E00735120 /* AdSupport.framework */; };
 		D3E25E8C1909BAC9008E097F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E25E8B1909BAC9008E097F /* libz.dylib */; };
 		D3F82EE61908852C004BE587 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F82EE51908852C004BE587 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
@@ -72,15 +78,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D30266341914850C00D4F187 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = Library/FacebookSDK.framework; sourceTree = "<group>"; };
+		D3026636191485A200D4F187 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Library/Parse.framework; sourceTree = "<group>"; };
+		D3026638191485AA00D4F187 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D302663A191485B200D4F187 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		D302663C191485BF00D4F187 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D302663E191485C600D4F187 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		D3026640191485CD00D4F187 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D304D2C3190C412C005E7E78 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		D304D2C5190C4133005E7E78 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		D304D2C7190C4142005E7E78 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		D304D2C9190C414E005E7E78 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		D304D2CB190C4156005E7E78 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		D304D2CD190C415D005E7E78 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		D304D2CF190C417A005E7E78 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Library/Parse.framework; sourceTree = "<group>"; };
 		D30D885E190DE54E000D9F8A /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		D30D885F190DE54E000D9F8A /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		D316FE691917347900539B12 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = TapConnect/TestFlight/libTestFlight.a; sourceTree = "<group>"; };
+		D33CDCFF191D2F0A009745B5 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		D379A4B81907BF6E002A7D1F /* TapConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D379A4BB1907BF6E002A7D1F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D379A4BD1907BF6E002A7D1F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -127,7 +136,6 @@
 		D379A50E1907FC72002A7D1F /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "View+MASAdditions.h"; path = "Library/Masonry/View+MASAdditions.h"; sourceTree = "<group>"; };
 		D379A50F1907FC72002A7D1F /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "View+MASAdditions.m"; path = "Library/Masonry/View+MASAdditions.m"; sourceTree = "<group>"; };
 		D379A5101907FC72002A7D1F /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Library/Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		D38E9358190D380000B2434B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = Library/FacebookSDK.framework; sourceTree = "<group>"; };
 		D38E935B190D49F700B2434B /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SVProgressHUD.bundle; path = Library/SVProgressHUD/SVProgressHUD.bundle; sourceTree = "<group>"; };
 		D38E935C190D49F700B2434B /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = Library/SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
 		D38E935D190D49F700B2434B /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVProgressHUD.m; path = Library/SVProgressHUD/SVProgressHUD.m; sourceTree = "<group>"; };
@@ -158,7 +166,16 @@
 		D3CA30E01909B7460006C761 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = TapConnect/TestFlight/TestFlight.h; sourceTree = "<group>"; };
 		D3CA30E11909B7460006C761 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+AsyncLogging.h"; path = "TapConnect/TestFlight/TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		D3CA30E21909B7460006C761 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+ManualSessions.h"; path = "TapConnect/TestFlight/TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		D3E25E891909B7DD008E097F /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = TapConnect/TestFlight/libTestFlight.a; sourceTree = "<group>"; };
+		D3D8232F19149AD000735120 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = Library/GoogleAnalytics/GoogleAnalytics/GAI.h; sourceTree = "<group>"; };
+		D3D8233019149AD000735120 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = Library/GoogleAnalytics/GoogleAnalytics/GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		D3D8233119149AD000735120 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIFields.h; path = Library/GoogleAnalytics/GoogleAnalytics/GAIFields.h; sourceTree = "<group>"; };
+		D3D8233219149AD000735120 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAILogger.h; path = Library/GoogleAnalytics/GoogleAnalytics/GAILogger.h; sourceTree = "<group>"; };
+		D3D8233319149AD000735120 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = Library/GoogleAnalytics/GoogleAnalytics/GAITrackedViewController.h; sourceTree = "<group>"; };
+		D3D8233419149AD000735120 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = Library/GoogleAnalytics/GoogleAnalytics/GAITracker.h; sourceTree = "<group>"; };
+		D3D8233519149AED00735120 /* libAdIdAccess.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAdIdAccess.a; path = Library/GoogleAnalytics/libAdIdAccess.a; sourceTree = "<group>"; };
+		D3D8233619149AED00735120 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = Library/GoogleAnalytics/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		D3D8233919149C3100735120 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D3D8233B19149C3E00735120 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		D3E25E8B1909BAC9008E097F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D3F82EE51908852C004BE587 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -168,13 +185,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D38E9359190D380000B2434B /* FacebookSDK.framework in Frameworks */,
-				D304D2D0190C417A005E7E78 /* Parse.framework in Frameworks */,
-				D304D2CE190C415D005E7E78 /* SystemConfiguration.framework in Frameworks */,
-				D304D2CC190C4156005E7E78 /* StoreKit.framework in Frameworks */,
-				D304D2CA190C414E005E7E78 /* Security.framework in Frameworks */,
-				D304D2C8190C4142005E7E78 /* MobileCoreServices.framework in Frameworks */,
-				D304D2C6190C4133005E7E78 /* CFNetwork.framework in Frameworks */,
+				D316FE6A1917347900539B12 /* libTestFlight.a in Frameworks */,
+				D3D8233C19149C3E00735120 /* AdSupport.framework in Frameworks */,
+				D3D8233A19149C3100735120 /* CoreData.framework in Frameworks */,
+				D3D8233719149AED00735120 /* libAdIdAccess.a in Frameworks */,
+				D3D8233819149AED00735120 /* libGoogleAnalyticsServices.a in Frameworks */,
+				D3026641191485CD00D4F187 /* SystemConfiguration.framework in Frameworks */,
+				D302663F191485C600D4F187 /* StoreKit.framework in Frameworks */,
+				D302663D191485BF00D4F187 /* Security.framework in Frameworks */,
+				D302663B191485B200D4F187 /* MobileCoreServices.framework in Frameworks */,
+				D3026639191485AA00D4F187 /* CFNetwork.framework in Frameworks */,
+				D3026637191485A200D4F187 /* Parse.framework in Frameworks */,
+				D30266351914850C00D4F187 /* FacebookSDK.framework in Frameworks */,
 				D304D2C4190C412C005E7E78 /* AudioToolbox.framework in Frameworks */,
 				D3E25E8C1909BAC9008E097F /* libz.dylib in Frameworks */,
 				D3B76417190920D300BF9C7A /* CoreLocation.framework in Frameworks */,
@@ -223,16 +245,20 @@
 		D379A4BA1907BF6E002A7D1F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D38E9358190D380000B2434B /* FacebookSDK.framework */,
-				D304D2CF190C417A005E7E78 /* Parse.framework */,
-				D304D2CD190C415D005E7E78 /* SystemConfiguration.framework */,
-				D304D2CB190C4156005E7E78 /* StoreKit.framework */,
-				D304D2C9190C414E005E7E78 /* Security.framework */,
-				D304D2C7190C4142005E7E78 /* MobileCoreServices.framework */,
-				D304D2C5190C4133005E7E78 /* CFNetwork.framework */,
+				D316FE691917347900539B12 /* libTestFlight.a */,
+				D3D8233B19149C3E00735120 /* AdSupport.framework */,
+				D3D8233919149C3100735120 /* CoreData.framework */,
+				D3D8233519149AED00735120 /* libAdIdAccess.a */,
+				D3D8233619149AED00735120 /* libGoogleAnalyticsServices.a */,
+				D3026640191485CD00D4F187 /* SystemConfiguration.framework */,
+				D302663E191485C600D4F187 /* StoreKit.framework */,
+				D302663C191485BF00D4F187 /* Security.framework */,
+				D302663A191485B200D4F187 /* MobileCoreServices.framework */,
+				D3026638191485AA00D4F187 /* CFNetwork.framework */,
+				D3026636191485A200D4F187 /* Parse.framework */,
+				D30266341914850C00D4F187 /* FacebookSDK.framework */,
 				D304D2C3190C412C005E7E78 /* AudioToolbox.framework */,
 				D3E25E8B1909BAC9008E097F /* libz.dylib */,
-				D3E25E891909B7DD008E097F /* libTestFlight.a */,
 				D3B76416190920D300BF9C7A /* CoreLocation.framework */,
 				D3B7641419091A8A00BF9C7A /* CoreBluetooth.framework */,
 				D3F82EE51908852C004BE587 /* QuartzCore.framework */,
@@ -247,6 +273,7 @@
 		D379A4C11907BF6E002A7D1F /* TapConnect */ = {
 			isa = PBXGroup;
 			children = (
+				D33CDCFF191D2F0A009745B5 /* iTunesArtwork */,
 				D379A4CA1907BF6E002A7D1F /* AppDelegate.h */,
 				D379A4CB1907BF6E002A7D1F /* AppDelegate.m */,
 				D379A4CD1907BF6E002A7D1F /* Main_iPhone.storyboard */,
@@ -301,6 +328,7 @@
 		D379A4F91907FC54002A7D1F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				D3D8232D19149AB700735120 /* GoogleAnalytics */,
 				D38E938B190D5FA500B2434B /* Reachability */,
 				D38E9360190D531F00B2434B /* Categories */,
 				D38E935A190D49ED00B2434B /* SVProgressHUD */,
@@ -390,6 +418,27 @@
 			name = TestFlight;
 			sourceTree = "<group>";
 		};
+		D3D8232D19149AB700735120 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				D3D8232E19149AC100735120 /* GoogleAnalytics */,
+			);
+			name = GoogleAnalytics;
+			sourceTree = "<group>";
+		};
+		D3D8232E19149AC100735120 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				D3D8232F19149AD000735120 /* GAI.h */,
+				D3D8233019149AD000735120 /* GAIDictionaryBuilder.h */,
+				D3D8233119149AD000735120 /* GAIFields.h */,
+				D3D8233219149AD000735120 /* GAILogger.h */,
+				D3D8233319149AD000735120 /* GAITrackedViewController.h */,
+				D3D8233419149AD000735120 /* GAITracker.h */,
+			);
+			name = GoogleAnalytics;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -467,6 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D38E935E190D49F800B2434B /* SVProgressHUD.bundle in Resources */,
+				D33CDD00191D2F0A009745B5 /* iTunesArtwork in Resources */,
 				D379A4D21907BF6E002A7D1F /* Main_iPad.storyboard in Resources */,
 				D379A4D71907BF6E002A7D1F /* Images.xcassets in Resources */,
 				D379A4CF1907BF6E002A7D1F /* Main_iPhone.storyboard in Resources */,
@@ -657,21 +707,26 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 					/Users/RyuCJ/Documents/FacebookSDK,
-					/Users/RyuCJ/work/TapConnect/Library,
+					"$(SDKROOT)/Library",
+					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TapConnect/TapConnect-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
+					TESTFLIGHT_ENABLED,
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "TapConnect/TapConnect-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/TapConnect/TestFlight",
+					"$(PROJECT_DIR)/TapConnect/TestFlight",
+					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)/GoogleAnalytics",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6A9C98D4-278E-4E95-B15A-1CBCED2172D0";
+				PROVISIONING_PROFILE = "2310F9EF-BEE3-4A49-987B-D2D8AFFDCF86";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -686,18 +741,22 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 					/Users/RyuCJ/Documents/FacebookSDK,
-					/Users/RyuCJ/work/TapConnect/Library,
+					"$(SDKROOT)/Library",
+					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TapConnect/TapConnect-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = TESTFLIGHT_ENABLED;
 				INFOPLIST_FILE = "TapConnect/TapConnect-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/TapConnect/TestFlight",
+					"$(PROJECT_DIR)/TapConnect/TestFlight",
+					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)/GoogleAnalytics",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B523B747-65C6-4FF5-B307-E6EE5969B0AD";
+				PROVISIONING_PROFILE = "4439D6C7-896E-49F9-9155-FF5DB3BBA005";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

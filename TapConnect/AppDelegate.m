@@ -14,9 +14,26 @@
 {
     // Override point for customization after application launch.
 #ifdef TESTFLIGHT_ENABLED
-    [TestFlight takeOff:@"639dbf31-3ad9-4ebe-8e60-27b91df623d2"];
+    [TestFlight takeOff:@"553d8d5d-8e38-45eb-b72d-520fbdafbd75"];
 #endif
     
+
+//------ google analytics ---------------------
+    // Optional: automatically send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval = 20;
+    
+    // Optional: set Logger to VERBOSE for debug information.
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    
+    // Initialize a tracker using a Google Analytics property ID.
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50623326-1"];
+
+    
+    
+//------- parse -----------------------------------
 #if false
     // donaldp24@outlook.com
     [Parse setApplicationId:@"7JjHTKkgZlERvnFE2g2dxSvMWYNOiLNXfoTOn7Wv"
@@ -24,11 +41,12 @@
 #else
     [Parse setApplicationId:@"qaIHc9DU6vKmuTXpGrO4RBA77HOMj4C40Wpr6RgY"
                   clientKey:@"6qN3XmllHwlfL8PpUMlT5iLukHgR9NR5mOxmCQyP"];
-    
-    
 #endif
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+//--------------------------------------------------
+    
+    
     
     
 /*
@@ -79,7 +97,7 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
-    [[PFFacebookUtils session] close];
+    //[[PFFacebookUtils session] close];
 }
     
 // During the Facebook login flow, your app passes control to the Facebook iOS app or Facebook in a mobile browser.

@@ -13,6 +13,8 @@
 #import "User.h"
 #import "Common.h"
 
+#import "GAIDictionaryBuilder.h"
+
 
 #define kDuplicateInterval      3
 
@@ -21,7 +23,6 @@
 #define ENTER_WHEN_NEAR         1
 
 #define kAnimTimeInterval   1
-
 
 
 @interface ViewController () {
@@ -70,12 +71,7 @@
     currMajor = -1;
     currMinor = -1;
     
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    [self initRegion];
     
-    self.isBluetoothOn = YES;
-    [self refreshBluetoothStatus];
     
     // load images
     UIImage *image = [UIImage imageNamed:@"bluetoothicon"];
@@ -92,7 +88,16 @@
     [bluetoothIcons addObject:image3];
     [bluetoothIcons addObject:image4];
     
+    NSLog(@"main view opened - view did load");
+    
     animIndex = 0;
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    [self initRegion];
+    
+    self.isBluetoothOn = YES;
+    [self refreshBluetoothStatus];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -132,6 +137,8 @@
     self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
                                                            identifier:@"com.app.BeaconRegion"];
     [self.locationManager startMonitoringForRegion:self.beaconRegion];
+    
+    NSLog(@"init region");
 }
 
 
@@ -183,6 +190,8 @@
         // Close the session and remove the access token from the cache
         // The session state handler (in the app delegate) will be called automatically
         [FBSession.activeSession closeAndClearTokenInformation];
+        
+        NSLog(@"logout - close facebook session!");
     }
     
     [self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
@@ -208,159 +217,206 @@
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
     //self.lblStatus.text = @"user entered in a range of beacon";
+    
+    NSLog(@"didEnterRegion -- ");
 }
 
 -(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
     [self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
     //self.lblStatus.text = @"user exited in a range of beacon";
+    
+    NSLog(@"didExitRegion ---");
 
 }
 
 -(void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
-    CLBeacon *beacon;// = [[CLBeacon alloc] init];
-    beacon = [beacons firstObject];
     
-    if (beacon == nil)
-    {
-        //
-    }
-    else
-    {
-#if ENTER_WHEN_NEAR
-        if (beacon.proximity == CLProximityUnknown || beacon.proximity == CLProximityFar || beacon.proximity == CLProximityNear)
-#else
-        if (beacon.proximity == CLProximityUnknown)
+#ifdef USE_TRY
+    @try {
 #endif
+        CLBeacon *beacon;// = [[CLBeacon alloc] init];
+        beacon = [beacons firstObject];//[[beacons firstObject] copy];
+        
+        if (beacons == nil || [beacons count] == 0 || beacon == nil)
         {
-            animIndex = 0;
-            
-            if (currMajor != -1 && currMinor != -1)
-            {
-                // ------ duplicate checking -----------
-                NSDate *currDate = [NSDate date];
-                
-                BOOL isDuplicated = YES;
-                if (exitTime == nil)
-                    isDuplicated = NO;
-                else
-                {
-                    NSTimeInterval secs = [currDate timeIntervalSinceDate:exitTime];
-                    if (secs < kDuplicateInterval)
-                        isDuplicated = YES;
-                    else
-                        isDuplicated = NO;
-                }
-                exitTime = currDate;
-                
-#if ENABLE_RECORDING_OUT
-                User *user = [User currentUser];
-                if (user)
-                {
-                    PFObject *event = [PFObject objectWithClassName:@"Events"];
-                    event[@"email"] = user.email;
-                    event[@"type"] = @"out of range";
-                    event[@"uuid"] = beacon.proximityUUID.UUIDString;
-                    event[@"major"] = [NSString stringWithFormat:@"%d", /*[beacon.major intValue]*/ currMajor];
-                    event[@"minior"] = [NSString stringWithFormat:@"%d", /*[beacon.minor intValue]*/ currMinor];
-                    event[@"localtime"] = [Common date2str:[NSDate date] withFormat:DATETIME_FORMAT];
-                    [event saveInBackground];
-                }
-#endif
-                
-                currMajor = currMinor = -1;
-                
-                self.lblStatus.text = @"user exited in a range of beacon";
-                
-                NSLog(@"exited -------------------- \n");
-            }
-            
+            if (beacons == nil)
+                NSLog(@"beacons = nil");
+            else if ([beacons count] == 0)
+                NSLog(@"beacons count = 0");
+            else
+                NSLog(@"beacon = nil");
         }
         else
         {
-            animIndex = (animIndex + 1) % [bluetoothIcons count];
+            CLProximity beaconProximity = beacon.proximity;
+            NSString *beaconUUID = [NSString stringWithFormat:@"%@", beacon.proximityUUID.UUIDString];
+            int beaconMajor = [beacon.major intValue];
+            int beaconMinor = [beacon.minor intValue];
             
-            if (currMajor != [beacon.major intValue] || currMinor != [beacon.minor intValue]) {
-                
-                // ------ duplicate checking -----------
-                NSDate *currDate = [NSDate date];
-                
-                BOOL isDuplicated = YES;
-                if (enterTime == nil)
-                    isDuplicated = NO;
+#if ENTER_WHEN_NEAR
+            if (beaconProximity == CLProximityUnknown || beaconProximity == CLProximityFar || beaconProximity == CLProximityNear)
+#else
+                if (beaconProximity == CLProximityUnknown)
+#endif
+                {
+                    NSLog(@"out of range : %d", (int)beaconProximity);
+                    
+                    animIndex = 0;
+                    
+                    if (currMajor != -1 && currMinor != -1)
+                    {
+                        // ------ duplicate checking -----------
+                        NSDate *currDate = [NSDate date];
+                        
+                        BOOL isDuplicated = YES;
+                        if (exitTime == nil)
+                            isDuplicated = NO;
+                        else
+                        {
+                            NSTimeInterval secs = [currDate timeIntervalSinceDate:exitTime];
+                            if (secs < kDuplicateInterval)
+                                isDuplicated = YES;
+                            else
+                                isDuplicated = NO;
+                        }
+                        exitTime = currDate;
+                        
+#if ENABLE_RECORDING_OUT
+                        User *user = [User currentUser];
+                        if (user)
+                        {
+                            PFObject *event = [PFObject objectWithClassName:@"Events"];
+                            event[@"email"] = user.email;
+                            event[@"type"] = @"out of range";
+                            event[@"uuid"] = beaconUUID;
+                            event[@"major"] = [NSString stringWithFormat:@"%d", currMajor];
+                            event[@"minior"] = [NSString stringWithFormat:@"%d", currMinor];
+                            event[@"localtime"] = [Common date2str:[NSDate date] withFormat:DATETIME_FORMAT];
+                            [event saveInBackground];
+                        }
+                        else
+                            NSLog(@"out event not recorded since user is null");
+#endif
+                        
+                        currMajor = currMinor = -1;
+                        
+                        self.lblStatus.text = @"user exited in a range of beacon";
+                        
+                        NSLog(@"exited -------------------- \n");
+                    }
+                    
+                }
                 else
                 {
-                    NSTimeInterval secs = [currDate timeIntervalSinceDate:enterTime];
-                    if (secs < kDuplicateInterval)
-                        isDuplicated = YES;
-                    else
-                        isDuplicated = NO;
-                }
-                enterTime = currDate;
-                
-                // --------
-                User *user = [User currentUser];
-                
-                if (user && !isDuplicated)
-                {
-                    PFObject *event = [PFObject objectWithClassName:@"Events"];
-                    event[@"email"] = user.email;
-                    BOOL isEnter = NO;
-                    if (currMajor == -1 && currMinor == -1)
-                    {
-                        event[@"type"] = @"enter into range";
-                        isEnter = YES;
-                    }
-                    else
-                    {
-                        event[@"type"] = @"move in range";
-                        isEnter = NO;
-                    }
-                    event[@"uuid"] = beacon.proximityUUID.UUIDString;
-                    event[@"major"] = [NSString stringWithFormat:@"%d", [beacon.major intValue]];
-                    event[@"minior"] = [NSString stringWithFormat:@"%d", [beacon.minor intValue]];
-                    event[@"localtime"] = [Common date2str:[NSDate date] withFormat:DATETIME_FORMAT];
-                    if (isEnter == NO)
-                    {
+                    animIndex = (animIndex + 1) % [bluetoothIcons count];
+                    
+                    if (currMajor != beaconMajor || currMinor != beaconMinor) {
+                        
+                        NSLog(@"user enterend %d, %d", beaconMajor, beaconMinor);
+                        
+                        // ------ duplicate checking -----------
+                        NSDate *currDate = [NSDate date];
+                        
+                        BOOL isDuplicated = YES;
+                        if (enterTime == nil)
+                            isDuplicated = NO;
+                        else
+                        {
+                            NSTimeInterval secs = [currDate timeIntervalSinceDate:enterTime];
+                            if (secs < kDuplicateInterval)
+                                isDuplicated = YES;
+                            else
+                                isDuplicated = NO;
+                        }
+                        enterTime = currDate;
+                        
+                        // --------
+                        User *user = [User currentUser];
+                        
+                        if (user && !isDuplicated)
+                        {
+                            PFObject *event = [PFObject objectWithClassName:@"Events"];
+                            event[@"email"] = user.email;
+                            BOOL isEnter = NO;
+                            if (currMajor == -1 && currMinor == -1)
+                            {
+                                event[@"type"] = @"enter into range";
+                                isEnter = YES;
+                            }
+                            else
+                            {
+                                event[@"type"] = @"move in range";
+                                isEnter = NO;
+                            }
+                            event[@"uuid"] = beaconUUID;
+                            event[@"major"] = [NSString stringWithFormat:@"%d", beaconMajor];
+                            event[@"minior"] = [NSString stringWithFormat:@"%d", beaconMinor];
+                            event[@"localtime"] = [Common date2str:[NSDate date] withFormat:DATETIME_FORMAT];
+                            if (isEnter == NO)
+                            {
 #if ENABLE_RECORDING_MOVE
-                        [event saveInBackground];
+                                [event saveInBackground];
 #endif
-                    }
-                    else
-                    {
-                        [event saveInBackground];
+                            }
+                            else
+                            {
+                                [event saveInBackground];
+                            }
+                        }
+                        else
+                        {
+                            if (user == nil)
+                                NSLog(@"enter or move event not recorded since user is null");
+                            else
+                                NSLog(@"enter or move event not recorded since it is duplicated");
+                        }
+                        
+                        currMajor = beaconMajor;
+                        currMinor = beaconMinor;
+                        
+                        self.lblStatus.text = @"user entered in a range of beacon";
                     }
                 }
-                
-                currMajor = [beacon.major intValue];
-                currMinor = [beacon.minor intValue];
-                
-                self.lblStatus.text = @"user entered in a range of beacon";
-            }
         }
+        
+        
+        /*
+         self.beaconFoundLabel.text = @"Yes";
+         self.proximityUUIDLabel.text = beacon.proximityUUID.UUIDString;
+         self.majorLabel.text = [NSString stringWithFormat:@"%@", beacon.major];
+         self.minorLabel.text = [NSString stringWithFormat:@"%@", beacon.minor];
+         self.accuracyLabel.text = [NSString stringWithFormat:@"%f", beacon.accuracy];
+         if (beacon.proximity == CLProximityUnknown) {
+         self.distanceLabel.text = @"Unknown Proximity";
+         } else if (beacon.proximity == CLProximityImmediate) {
+         self.distanceLabel.text = @"Immediate";
+         } else if (beacon.proximity == CLProximityNear) {
+         self.distanceLabel.text = @"Near";
+         } else if (beacon.proximity == CLProximityFar) {
+         self.distanceLabel.text = @"Far";
+         }
+         self.rssiLabel.text = [NSString stringWithFormat:@"%i", beacon.rssi];
+         */
+        
+#ifdef USE_TRY
     }
+    @catch (NSException *exception) {
+        // May return nil if a tracker has not already been initialized with a
+        // property ID.
+        id tracker = [[GAI sharedInstance] defaultTracker];
+
+        [tracker send:[[GAIDictionaryBuilder createExceptionWithDescription:[NSString stringWithFormat:@"exception %@:%@", exception.name, exception.reason] withFatal:[NSNumber numberWithBool:NO]] build]];  // isFatal (required). NO indicates non-fatal exception.
+    }
+    @finally {
+        //
+    }
+#endif
     
-    
-    /*
-     self.beaconFoundLabel.text = @"Yes";
-     self.proximityUUIDLabel.text = beacon.proximityUUID.UUIDString;
-     self.majorLabel.text = [NSString stringWithFormat:@"%@", beacon.major];
-     self.minorLabel.text = [NSString stringWithFormat:@"%@", beacon.minor];
-     self.accuracyLabel.text = [NSString stringWithFormat:@"%f", beacon.accuracy];
-     if (beacon.proximity == CLProximityUnknown) {
-     self.distanceLabel.text = @"Unknown Proximity";
-     } else if (beacon.proximity == CLProximityImmediate) {
-     self.distanceLabel.text = @"Immediate";
-     } else if (beacon.proximity == CLProximityNear) {
-     self.distanceLabel.text = @"Near";
-     } else if (beacon.proximity == CLProximityFar) {
-     self.distanceLabel.text = @"Far";
-     }
-     self.rssiLabel.text = [NSString stringWithFormat:@"%i", beacon.rssi];
-     */
 }
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
     [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
+    NSLog(@"didStartMonitoringForRegion -- ");
 }
 
 #pragma mark - show/hide bluetooth status

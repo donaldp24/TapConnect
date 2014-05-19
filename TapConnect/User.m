@@ -58,9 +58,25 @@ static User *_currentUser;
 + (User *)getUserFromPFUser:(PFUser *)pfUser
 {
     User *user = [[User alloc] init];
-    user.email = pfUser.username;
-    user.pwd = pfUser.password;
-    user.displayName = pfUser[@"fullname"];
+    
+    // email
+    if (pfUser.username != nil)
+        user.email = pfUser.username;
+    else
+        user.email = @"";
+    
+    // password
+    if (pfUser.password != nil)
+        user.pwd = pfUser.password;
+    else
+        user.pwd = @"";
+    
+    // fullname
+    if (pfUser[@"fullname"] != nil)
+        user.displayName = pfUser[@"fullname"];
+    else
+        user.displayName = @"";
+    
     user.userType = UserTypeNative;
 
     return user;
@@ -70,9 +86,27 @@ static User *_currentUser;
 {
     User *user = [[User alloc] init];
     
-    user.email = [fbUser objectForKey:@"email"];
-    user.pwd = [fbUser objectForKey:@"id"];
-    user.displayName = [fbUser objectForKey:@"name"];
+    // email
+    NSString *obj = [fbUser objectForKey:@"email"];
+    if (obj == nil)
+        user.email = @"";
+    else
+        user.email = [NSString stringWithFormat:@"%@", obj];
+    
+    // id
+    obj = [fbUser objectForKey:@"id"];
+    if (obj == nil)
+        user.pwd = @"";
+    else
+        user.pwd = [NSString stringWithFormat:@"%@", obj];
+    
+    // display name
+    obj = [fbUser objectForKey:@"name"];
+    if (obj == nil)
+        user.displayName = @"";
+    else
+        user.displayName = [NSString stringWithFormat:@"%@", obj];
+    
     user.userType = UserTypeFB;
     
     return user;

@@ -40,7 +40,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="dEZ-Wy-Jde" secondAttribute="trailing" id="7c7-HD-nKl"/>
-                            <constraint firstItem="07D-wa-QbJ" firstAttribute="top" secondItem="dEZ-Wy-Jde" secondAttribute="bottom" id="BGS-bs-d8x"/>
+                            <constraint firstItem="07D-wa-QbJ" firstAttribute="bottom" secondItem="dEZ-Wy-Jde" secondAttribute="bottom" id="BGS-bs-d8x"/>
                             <constraint firstItem="dEZ-Wy-Jde" firstAttribute="leading" secondItem="4It-Z3-p8h" secondAttribute="leading" id="Lse-za-Sd6"/>
                             <constraint firstItem="dEZ-Wy-Jde" firstAttribute="top" secondItem="4It-Z3-p8h" secondAttribute="top" id="TOl-oa-eiv"/>
                         </constraints>

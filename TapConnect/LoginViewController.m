@@ -118,7 +118,7 @@ enum  {
             }
             
             // If there's one, just open the session silently, without showing the user the login UI
-            [FBSession openActiveSessionWithReadPermissions:@[@"basic_info"]
+            [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"]
                                                allowLoginUI:NO
                                           completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
                                               // Handler for session state changes
@@ -574,6 +574,8 @@ enum  {
 
 - (void)onLoginWithFacebook:(id)sender {
     
+    NSLog(@"onLoginWithFacebook...");
+    
     [SVProgressHUD showWithStatus:@"Please wait" maskType:SVProgressHUDMaskTypeGradient];
     
     if (![Common hasConnectivity])
@@ -587,6 +589,8 @@ enum  {
     if (FBSession.activeSession.state == FBSessionStateOpen
         || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
         
+        NSLog(@"session is exist, so first clear session...");
+        
         // Close the session and remove the access token from the cache
         // The session state handler (in the app delegate) will be called automatically
         [FBSession.activeSession closeAndClearTokenInformation];
@@ -595,52 +599,35 @@ enum  {
     {
         // Open a session showing the user the login UI
         // You must ALWAYS ask for basic_info permissions when opening a session
-        [FBSession openActiveSessionWithReadPermissions:@[@"basic_info"]
+        [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"]
                                            allowLoginUI:YES
                                       completionHandler:
          ^(FBSession *session, FBSessionState state, NSError *error) {
              
+             NSLog(@"openActiveSessionWithReadPermissions completionHander...");
+             
              // If the session was opened successfully
              if (!error && state == FBSessionStateOpen){
-                 NSLog(@"Session opened");
+                 NSLog(@"Session opened!");
                  // Request to get information
                  [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser>* result, NSError *error) {
+                     
+                     NSLog(@"fetching information...");
                     
                      if (!error)
                      {
+                         NSLog(@"fetched information successfully! %@, %@, %@", result[@"email"], result[@"id"], result[@"name"]);
+                         
                          [User setCurrentUser:[User getUserFromFBUser:result]];
+                         
                          [SVProgressHUD dismiss];
+                         
+                         // go into main screen
                          [self performSelectorOnMainThread:@selector(goInto) withObject:nil waitUntilDone:NO];
-                         
-                         /*
-                         [SVProgressHUD showWithStatus:@"Please wait" maskType:SVProgressHUDMaskTypeGradient];
-                         
-                         PFUser *user = [PFUser user];
-                         user.username = [result objectForKey:@"email"];
-                         user.password = [result objectForKey:@"id"];
-                         user[KEY_DISPLAYNAME] = [result objectForKey:@"name"];
-                         user[@"usertype"] = [NSString stringWithFormat:@"%d", UserTypeFB];
-
-                         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                             if (!error) {
-                                 // Hooray! Let them use the app now.
-                                 [SVProgressHUD dismiss];
-                                 
-                                 [self performSelectorOnMainThread:@selector(goInto) withObject:nil waitUntilDone:NO];
-                             } else {
-                                 NSString *errorString = [error userInfo][@"error"];
-                                 // Show the errorString somewhere and let the user try again.
-                                 //[SVProgressHUD showErrorWithStatus:errorString duration:3];
-                                 
-                                 [SVProgressHUD dismiss];
-                                 
-                                 [self performSelectorOnMainThread:@selector(goInto) withObject:nil waitUntilDone:NO];
-                             }
-                         }];
-                          */
                      }
                      else
                      {
+                         NSLog(@"fatching information failed : error = %@", [error localizedDescription]);
                          [SVProgressHUD showErrorWithStatus:@"Getting user info failed." duration:3];
                      }
                  }];
@@ -667,6 +654,7 @@ enum  {
                      alertTitle = @"Something went wrong";
                      alertText = [FBErrorUtility userMessageForError:error];
                      //[self showMessage:alertText withTitle:alertTitle];
+                     NSLog(@"error open session : %@", alertText);
                  } else {
                      
                      // If the user cancelled login, do nothing
@@ -683,6 +671,8 @@ enum  {
                          // Here we will handle all other errors with a generic error message.
                          // We recommend you check our Handling Errors guide for more information
                          // https://developers.facebook.com/docs/ios/errors/
+                         
+                         NSLog(@"error open session : %@", alertText);
                      } else {
                          //Get more error information from the error
                          NSDictionary *errorInformation = [[[error.userInfo objectForKey:@"com.facebook.sdk:ParsedJSONResponseKey"] objectForKey:@"body"] objectForKey:@"error"];
@@ -692,8 +682,12 @@ enum  {
                          alertText = [NSString stringWithFormat:@"Please retry. \n\n If the problem persists contact us and mention this error code: %@", [errorInformation objectForKey:@"message"]];
                          //[self showMessage:alertText withTitle:alertTitle];
                          [SVProgressHUD showErrorWithStatus:alertText duration:3];
+                         
+                         NSLog(@"error open session : %@", alertText);
                      }
                  }
+                 
+                 NSLog(@"clearing fb token : %@", alertText);
                  // Clear this token
                  [FBSession.activeSession closeAndClearTokenInformation];
                  // Show the user the logged-out UI
@@ -702,34 +696,6 @@ enum  {
              
          }];
     }
-     
-    
-    /*
-    // The permissions requested from the user
-    NSArray *permissionsArray = @[ @"email", @"user_about_me", @"user_relationships", @"user_birthday", @"user_location", @"user_checkins"];
-    
-    // Login PFUser using Facebook
-    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-        //[_activityIndicator stopAnimating]; // Hide loading indicator
-        
-        if (!user) {
-            if (!error) {
-                NSLog(@"Uh oh. The user cancelled the Facebook login.");
-            } else {
-                NSLog(@"Uh oh. An error occurred: %@", error);
-            }
-        } else if (user.isNew) {
-            NSLog(@"User with facebook signed up and logged in!");
-            //[self.navigationController pushViewController:[[UserDetailsViewController alloc] initWithStyle:UITableViewStyleGrouped] animated:YES];
-            [self performSelectorOnMainThread:@selector(goInto) withObject:nil waitUntilDone:NO];
-        } else {
-            NSLog(@"User with facebook logged in!");
-            //[self.navigationController pushViewController:[[UserDetailsViewController alloc] initWithStyle:UITableViewStyleGrouped] animated:YES];
-            [self performSelectorOnMainThread:@selector(goInto) withObject:nil waitUntilDone:NO];
-            NSLog(@"User : %@, email : %@", user.username, user.email);
-        }
-    }];
-     */
 }
 
 - (void)leaveSignUpState {
